@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata, option,} from 'clime';
-import {TransactionHttp,} from 'nem2-sdk';
+import {TransactionHttp,} from 'proximax-nem2-sdk';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 import {TransactionService} from '../../service/transaction.service';

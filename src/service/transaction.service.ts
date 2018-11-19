@@ -29,7 +29,7 @@ import {
     SecretProofTransaction,
     Transaction,
     TransferTransaction,
-} from 'nem2-sdk';
+} from 'proximax-nem2-sdk';
 
 export class TransactionService {
 

@@ -16,7 +16,7 @@
  *
  */
 import {option} from 'clime';
-import {Address} from 'nem2-sdk';
+import {Address} from 'proximax-nem2-sdk';
 import {AddressValidator} from './address.validator';
 import {ProfileCommand, ProfileOptions} from './profile.command';
 import {TransactionService} from './service/transaction.service';

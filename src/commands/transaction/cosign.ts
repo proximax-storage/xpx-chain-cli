@@ -23,7 +23,7 @@ import {
     CosignatureTransaction, MultisigAccountInfo,
     PublicAccount, QueryParams,
     TransactionHttp,
-} from 'nem2-sdk';
+} from 'proximax-nem2-sdk';
 import {Observable} from 'rxjs/Observable';
 import {Profile} from '../../model/profile';
 import {OptionsResolver} from '../../options-resolver';

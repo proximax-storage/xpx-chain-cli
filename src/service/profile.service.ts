@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-import {Account} from 'nem2-sdk';
+import {Account} from 'proximax-nem2-sdk';
 import {Profile} from '../model/profile';
 import {ProfileRepository} from '../respository/profile.repository';
 

@@ -32,7 +32,7 @@ import {
     TransferTransaction,
     UInt64,
     XEM,
-} from 'nem2-sdk';
+} from 'proximax-nem2-sdk';
 import {AddressValidator} from '../../address.validator';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';

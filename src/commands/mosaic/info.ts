@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, ExpectedError, metadata, option,} from 'clime';
-import {AccountHttp, MosaicHttp, MosaicId, MosaicService, NamespaceHttp,} from 'nem2-sdk';
+import {AccountHttp, MosaicHttp, MosaicId, MosaicService, NamespaceHttp,} from 'proximax-nem2-sdk';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 import {OptionsResolver} from '../../options-resolver';
 
