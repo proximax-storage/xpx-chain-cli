@@ -17,7 +17,7 @@
  */
 
 import {expect} from 'chai';
-import {Account, NetworkType} from 'proximax-nem2-sdk';
+import {Account, NetworkType} from 'js-xpx-chain-library';
 import {Profile} from '../../src/model/profile';
 
 describe('Profile', () => {

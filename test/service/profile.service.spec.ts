@@ -16,7 +16,7 @@
  *
  */
 import {expect} from 'chai';
-import {Account, NetworkType} from 'proximax-nem2-sdk';
+import {Account, NetworkType} from 'js-xpx-chain-library';
 import {instance, mock, when} from 'ts-mockito';
 import {Profile} from '../../src/model/profile';
 import {ProfileRepository} from '../../src/respository/profile.repository';
