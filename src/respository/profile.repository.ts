@@ -16,7 +16,7 @@
  *
  */
 import * as fs from 'fs';
-import {Account} from 'nem2-sdk';
+import {Account} from 'js-xpx-chain-library';
 import {Profile} from '../model/profile';
 
 export class ProfileRepository {

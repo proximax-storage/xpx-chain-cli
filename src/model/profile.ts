@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-import {Account, NetworkType} from 'nem2-sdk';
+import {Account, NetworkType} from 'js-xpx-chain-library';
 
 export class Profile {
 

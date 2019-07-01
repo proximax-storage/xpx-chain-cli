@@ -16,7 +16,7 @@
  *
  */
 import {ExpectedError, option, ValidationContext, Validator} from 'clime';
-import {QueryParams} from 'nem2-sdk';
+import {QueryParams} from 'js-xpx-chain-library';
 import {TransactionService} from './service/transaction.service';
 import {ProfileCommand, ProfileOptions} from './profile.command';
 

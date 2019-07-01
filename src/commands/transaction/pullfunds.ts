@@ -31,7 +31,7 @@ import {
     TransactionHttp,
     TransferTransaction,
     UInt64,
-} from 'nem2-sdk';
+} from 'js-xpx-chain-library';
 import {AddressValidator} from '../../address.validator';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';

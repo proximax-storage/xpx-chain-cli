@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, ExpectedError, metadata, option} from 'clime';
-import {AccountHttp, MosaicHttp, MosaicId, MosaicService} from 'nem2-sdk';
+import {AccountHttp, MosaicHttp, MosaicId, MosaicService} from 'js-xpx-chain-library';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 

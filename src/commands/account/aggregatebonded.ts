@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {AccountHttp, PublicAccount} from 'nem2-sdk';
+import {AccountHttp, PublicAccount} from 'js-xpx-chain-library';
 import {AccountTransactionsCommand, AccountTransactionsOptions} from '../../account.transactions.command';
 import {OptionsResolver} from '../../options-resolver';
 

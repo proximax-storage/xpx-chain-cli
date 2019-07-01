@@ -16,7 +16,7 @@
  *
  */
 import {ExpectedError, ValidationContext, Validator} from 'clime';
-import {Address} from 'nem2-sdk';
+import {Address} from 'js-xpx-chain-library';
 
 export class AddressValidator implements Validator<string> {
     validate(value: string, context: ValidationContext): void {

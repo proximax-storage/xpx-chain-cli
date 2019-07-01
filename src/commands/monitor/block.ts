@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {Listener} from 'nem2-sdk';
+import {Listener} from 'js-xpx-chain-library';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 
 @command({

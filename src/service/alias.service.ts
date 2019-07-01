@@ -17,7 +17,7 @@
  */
 
 import {ExpectedError} from 'clime';
-import {Address, MosaicId, NamespaceId} from 'nem2-sdk';
+import {Address, MosaicId, NamespaceId} from 'js-xpx-chain-library';
 
 export class AliasService {
 

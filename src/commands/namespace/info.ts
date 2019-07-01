@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, ExpectedError, metadata, option} from 'clime';
-import {NamespaceHttp, NamespaceId, NamespaceService} from 'nem2-sdk';
+import {NamespaceHttp, NamespaceId, NamespaceService} from 'js-xpx-chain-library';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 import {OptionsResolver} from '../../options-resolver';
 

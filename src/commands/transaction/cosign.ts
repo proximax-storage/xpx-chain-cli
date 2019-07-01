@@ -25,7 +25,7 @@ import {
     PublicAccount,
     QueryParams,
     TransactionHttp,
-} from 'nem2-sdk';
+} from 'js-xpx-chain-library';
 import {Observable, of} from 'rxjs';
 import {catchError, filter, map, mergeMap, toArray} from 'rxjs/operators';
 import {Profile} from '../../model/profile';

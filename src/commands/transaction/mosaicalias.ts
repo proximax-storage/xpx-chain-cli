@@ -22,7 +22,7 @@ import {
     MosaicId,
     NamespaceId,
     TransactionHttp,
-} from 'nem2-sdk';
+} from 'js-xpx-chain-library';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 

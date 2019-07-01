@@ -41,7 +41,7 @@ import {
     SecretProofTransaction,
     Transaction,
     TransferTransaction,
-} from 'nem2-sdk';
+} from 'js-xpx-chain-library';
 
 export class TransactionService {
 

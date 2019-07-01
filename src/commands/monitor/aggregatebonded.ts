@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {Address, Listener} from 'nem2-sdk';
+import {Address, Listener} from 'js-xpx-chain-library';
 import {MonitorAddressCommand, MonitorAddressOptions} from '../../monitor.transaction.command';
 import {OptionsResolver} from '../../options-resolver';
 

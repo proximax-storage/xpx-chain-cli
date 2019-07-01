@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {Command, command, ExpectedError, metadata, option, Options, ValidationContext, Validator} from 'clime';
-import {Account, BlockHttp, NetworkHttp, NetworkType} from 'nem2-sdk';
+import {Account, BlockHttp, NetworkHttp, NetworkType} from 'js-xpx-chain-library';
 import * as readlineSync from 'readline-sync';
 import {forkJoin} from 'rxjs';
 import {OptionsResolver} from '../../options-resolver';
