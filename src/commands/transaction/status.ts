@@ -16,11 +16,10 @@
  *
  */
 import chalk from 'chalk';
-import {command, metadata, option,} from 'clime';
-import {TransactionHttp,} from 'nem2-sdk';
+import {command, metadata, option} from 'clime';
+import {TransactionHttp} from 'nem2-sdk';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
-import {TransactionService} from '../../service/transaction.service';
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -34,11 +33,9 @@ export class CommandOptions extends ProfileOptions {
     description: 'Fetch Transaction info',
 })
 export default class extends ProfileCommand {
-    private readonly transactionService: TransactionService;
 
     constructor() {
         super();
-        this.transactionService = new TransactionService();
     }
 
     @metadata
@@ -54,11 +51,16 @@ export default class extends ProfileCommand {
 
         this.spinner.start();
 
-        transactionHttp.getTransaction(hash)
+        transactionHttp.getTransactionStatus(hash)
             .subscribe((transaction) => {
                 this.spinner.stop(true);
-
-                console.log('\n' + this.transactionService.formatTransactionToFilter(transaction) + '\n');
+                console.log('group: ' + transaction.group);
+                console.log('status: ' + transaction.status);
+                console.log('hash: < ' + transaction.hash + ' >');
+                console.log('deadline: ' + transaction.deadline.value);
+                if(transaction.height.compact() > 0 ) {
+                    console.log('height: ' + transaction.height.compact());
+                }
             }, (err) => {
                 this.spinner.stop(true);
                 let text = '';

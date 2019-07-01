@@ -15,20 +15,22 @@
  * limitations under the License.
  *
  */
-import {Account, NetworkType} from 'proximax-nem2-sdk';
+import {Account, NetworkType} from 'nem2-sdk';
 
 export class Profile {
 
     constructor(public readonly account: Account,
                 public readonly networkType: NetworkType,
                 public readonly url: string,
-                public readonly name: string) {
+                public readonly name: string,
+                public readonly networkGenerationHash: string) {
 
     }
 
     toString(): string {
         return this.name + '-> \n\tNetwork:\t' + NetworkType[this.networkType] +
-        ' \n\tUrl:\t\t' + this.url + ' \n\tAddress:\t' + this.account.address.plain() +
-        ' \n\tPublicKey:\t' + this.account.publicKey + ' \n\tPrivateKey:\t' + this.account.privateKey + '\n';
+        ' \n\tUrl:\t\t' + this.url + ' \n\tGenerationHash:\t' + this.networkGenerationHash +
+            ' \n\tAddress:\t' + this.account.address.plain() + ' \n\tPublicKey:\t' + this.account.publicKey +
+            ' \n\tPrivateKey:\t' + this.account.privateKey + '\n';
     }
 }

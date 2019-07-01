@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata, option} from 'clime';
-import {Deadline, RegisterNamespaceTransaction, TransactionHttp, UInt64} from 'proximax-nem2-sdk';
+import {Deadline, RegisterNamespaceTransaction, TransactionHttp, UInt64} from 'nem2-sdk';
 import * as readlineSync from 'readline-sync';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
@@ -100,7 +100,7 @@ export default class extends ProfileCommand {
                 options.name, options.parentname, profile.networkType);
         }
 
-        const signedTransaction = profile.account.sign(registerNamespaceTransaction);
+        const signedTransaction = profile.account.sign(registerNamespaceTransaction, profile.networkGenerationHash);
 
         const transactionHttp = new TransactionHttp(profile.url);
 

@@ -21,29 +21,19 @@ import {
     AggregateTransaction,
     Deadline,
     MosaicDefinitionTransaction,
+    MosaicId,
+    MosaicNonce,
     MosaicProperties,
     MosaicSupplyChangeTransaction,
     MosaicSupplyType,
     TransactionHttp,
     UInt64,
-} from 'proximax-nem2-sdk';
+} from 'nem2-sdk';
 import * as readlineSync from 'readline-sync';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 
 export class CommandOptions extends ProfileOptions {
-    @option({
-        flag: 'm',
-        description: 'Mosaic name',
-    })
-    mosaicname: string;
-
-    @option({
-        flag: 'n',
-        description: 'Parent namespace name',
-    })
-    namespacename: string;
-
     @option({
         flag: 'a',
         description: 'Amount of tokens',
@@ -82,6 +72,14 @@ export class CommandOptions extends ProfileOptions {
         description: 'Mosaic duration in amount of blocks',
     })
     duration: number;
+
+    @option({
+        flag: 'e',
+        description: 'eternal',
+        toggle: true,
+    })
+    eternal: any;
+
 }
 
 @command({
@@ -98,29 +96,30 @@ export default class extends ProfileCommand {
     execute(options: CommandOptions) {
 
         const profile = this.getProfile(options);
-
-        const mosaicDefinitionTransaction = MosaicDefinitionTransaction.create(
-            Deadline.create(),
-            OptionsResolver(options,
-                'mosaicname',
-                () => undefined,
-                'Introduce mosaic name: '),
-            OptionsResolver(options,
-                'namespacename',
-                () => undefined,
-                'Introduce namespace name: '),
-            MosaicProperties.create({
-                duration: UInt64.fromUint(OptionsResolver(options,
+        const nonce = MosaicNonce.createRandom();
+        let blocksDuration;
+        if (!options.eternal) {
+            if (!readlineSync.keyInYN('Do you want an eternal mosaic?')) {
+                blocksDuration = UInt64.fromUint( OptionsResolver(options,
                     'duration',
                     () => undefined,
-                    'Introduce rental duration: ')),
+                    'Introduce the duration in blocks: '));
+            }
+        }
+        const mosaicDefinitionTransaction = MosaicDefinitionTransaction.create(
+            Deadline.create(),
+            nonce,
+            MosaicId.createFromNonce(nonce, profile.account.publicAccount),
+            MosaicProperties.create({
+                duration: blocksDuration,
                 divisibility: OptionsResolver(options,
                     'divisibility',
                     () => undefined,
                     'Introduce mosaic divisibility: '),
-                supplyMutable: options.supplymutable ? options.supplymutable : readlineSync.keyInYN('Do you want mosaic to have supply mutable?'),
-                transferable: options.transferable ? options.transferable : readlineSync.keyInYN('Do you want mosaic to be transferable?'),
-                levyMutable: options.levymutable ? options.levymutable : readlineSync.keyInYN('Do you want mosaic to have levy mutable?'),
+                supplyMutable: options.supplymutable ? options.supplymutable : readlineSync.keyInYN(
+                    'Do you want mosaic to have supply mutable?'),
+                transferable: options.transferable ? options.transferable : readlineSync.keyInYN(
+                    'Do you want mosaic to be transferable?'),
             }),
             profile.networkType,
         );
@@ -145,7 +144,7 @@ export default class extends ProfileCommand {
             profile.networkType,
             [],
         );
-        const signedTransaction = profile.account.sign(aggregateTransaction);
+        const signedTransaction = profile.account.sign(aggregateTransaction, profile.networkGenerationHash);
 
         const transactionHttp = new TransactionHttp(profile.url);
 
@@ -153,6 +152,9 @@ export default class extends ProfileCommand {
             console.log(chalk.green('Transaction announced correctly'));
             console.log('Hash:   ', signedTransaction.hash);
             console.log('Signer: ', signedTransaction.signer);
+            console.log(chalk.green('Your mosaic id is:'));
+            console.log('Hex: ', mosaicDefinitionTransaction.mosaicId.toHex());
+            console.log('Uint64: [', mosaicDefinitionTransaction.mosaicId.id.lower, mosaicDefinitionTransaction.mosaicId.id.higher + ']');
         }, (err) => {
             this.spinner.stop(true);
             let text = '';
