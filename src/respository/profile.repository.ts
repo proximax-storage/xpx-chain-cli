@@ -16,7 +16,7 @@
  *
  */
 import * as fs from 'fs';
-import {Account} from 'proximax-nem2-sdk';
+import {Account} from 'tsjs-xpx-chain-sdk';
 import {Profile} from '../model/profile';
 
 export class ProfileRepository {

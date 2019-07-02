@@ -36,10 +36,10 @@
     "chalk": "^2.3.0",
     "cli-spinner": "^0.2.7",
     "clime": "^0.5.9",
-    "proximax-nem2-sdk": "^0.10.11",
+    "tsjs-xpx-chain-sdk": "^0.2.0",
     "path": "^0.12.7",
     "readline-sync": "^1.4.9",
-    "rxjs": "^5.5.6"
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
@@ -48,10 +48,10 @@
     "coveralls": "^3.0.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
-    "ts-node": "^5.0.1",
     "ts-mockito": "^2.2.8",
+    "ts-node": "^5.0.1",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.2"
+    "typescript": "^3.3.3333"
   },
   "nyc": {
     "exclude": [

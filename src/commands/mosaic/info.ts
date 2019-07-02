@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, ExpectedError, metadata, option,} from 'clime';
-import {AccountHttp, MosaicHttp, MosaicId, MosaicService, NamespaceHttp,} from 'proximax-nem2-sdk';
+import {AccountHttp, MosaicHttp, MosaicId, MosaicService, NamespaceHttp,} from 'tsjs-xpx-chain-sdk';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 import {OptionsResolver} from '../../options-resolver';
 
@@ -74,11 +74,10 @@ export default class extends ProfileCommand {
         const mosaicService = new MosaicService(
             new AccountHttp(profile.url),
             new MosaicHttp(profile.url),
-            new NamespaceHttp(profile.url),
         );
 
         mosaicService.mosaicsView([mosaicId])
-            .subscribe((mosaicViews) => {
+            .subscribe((mosaicViews: any) => {
                 this.spinner.stop(true);
                 if (mosaicViews.length === 0) {
                     console.log('No mosaic exists with this id ' + mosaicId.toHex());

@@ -16,7 +16,7 @@
  *
  */
 import {ExpectedError, option, ValidationContext, Validator} from 'clime';
-import {QueryParams} from 'proximax-nem2-sdk';
+import {QueryParams} from 'tsjs-xpx-chain-sdk';
 import {TransactionService} from './service/transaction.service';
 import {ProfileCommand, ProfileOptions} from './profile.command';
 

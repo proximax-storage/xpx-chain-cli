@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, ExpectedError, metadata, option} from 'clime';
-import {AccountHttp, AccountInfo, Address, Mosaic, MosaicAmountView, MosaicHttp, MosaicService, NamespaceHttp,} from 'proximax-nem2-sdk';
+import {AccountHttp, AccountInfo, Address, Mosaic, MosaicAmountView, MosaicHttp, MosaicService, NamespaceHttp,} from 'tsjs-xpx-chain-sdk';
 import {AddressValidator} from '../../address.validator';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
@@ -57,18 +57,13 @@ export default class extends ProfileCommand {
             console.log(options);
             throw new ExpectedError('Introduce a valid address');
         }
-
+        
         const accountHttp = new AccountHttp(profile.url);
         const mosaicService = new MosaicService(
             accountHttp,
             new MosaicHttp(profile.url),
-            new NamespaceHttp(profile.url),
         );
         accountHttp.getAccountInfo(address)
-            .flatMap((accountInfo: AccountInfo) => mosaicService.mosaicsAmountViewFromAddress(address)
-                .map((mosaics: MosaicAmountView[]) => {
-                return {mosaics, info: accountInfo};
-            }))
             .subscribe((accountData: any) => {
                 const accountInfo = accountData.info;
                 this.spinner.stop(true);

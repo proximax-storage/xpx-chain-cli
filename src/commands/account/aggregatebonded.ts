@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {AccountHttp, PublicAccount} from 'proximax-nem2-sdk';
+import {AccountHttp, PublicAccount} from 'tsjs-xpx-chain-sdk';
 import {AccountTransactionsCommand, AccountTransactionsOptions} from '../../account.transactions.command';
 import {OptionsResolver} from '../../options-resolver';
 

@@ -16,7 +16,7 @@
  *
  */
 import {ExpectedError, ValidationContext, Validator} from 'clime';
-import {Address} from 'proximax-nem2-sdk';
+import {Address} from 'tsjs-xpx-chain-sdk';
 
 export class AddressValidator implements Validator<string> {
     validate(value: string, context: ValidationContext): void {
