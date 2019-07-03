@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-import {Account, NetworkType} from 'proximax-nem2-sdk';
+import {Account, NetworkType} from 'tsjs-xpx-chain-sdk';
 
 export class Profile {
 

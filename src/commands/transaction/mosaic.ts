@@ -26,7 +26,7 @@ import {
     MosaicSupplyType,
     TransactionHttp,
     UInt64,
-} from 'proximax-nem2-sdk';
+} from 'tsjs-xpx-chain-sdk';
 import * as readlineSync from 'readline-sync';
 import {OptionsResolver} from '../../options-resolver';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';

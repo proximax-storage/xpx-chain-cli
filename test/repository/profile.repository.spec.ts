@@ -17,7 +17,7 @@
  */
 import {expect} from 'chai';
 import * as fs from 'fs';
-import {Account, NetworkType} from 'proximax-nem2-sdk';
+import {Account, NetworkType} from 'tsjs-xpx-chain-sdk';
 import {Profile} from '../../src/model/profile';
 import {ProfileRepository} from '../../src/respository/profile.repository';
 

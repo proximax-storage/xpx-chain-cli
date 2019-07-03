@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {Listener} from 'proximax-nem2-sdk';
+import {Listener} from 'tsjs-xpx-chain-sdk';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 
 @command({

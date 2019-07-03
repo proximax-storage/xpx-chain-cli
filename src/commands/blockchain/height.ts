@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {BlockchainHttp} from 'proximax-nem2-sdk';
+import {BlockchainHttp} from 'tsjs-xpx-chain-sdk';
 import {ProfileCommand, ProfileOptions} from '../../profile.command';
 
 @command({

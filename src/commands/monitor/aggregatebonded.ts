@@ -17,7 +17,7 @@
  */
 import chalk from 'chalk';
 import {command, metadata} from 'clime';
-import {Address, Listener} from 'proximax-nem2-sdk';
+import {Address, Listener} from 'tsjs-xpx-chain-sdk';
 import {MonitorAddressCommand, MonitorAddressOptions} from '../../monitor.transaction.command';
 import {OptionsResolver} from '../../options-resolver';
 
