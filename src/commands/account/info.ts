@@ -46,7 +46,6 @@ export default class extends ProfileCommand {
         this.spinner.start();
 
         const profile = this.getProfile(options);
-
         let address: Address;
         try {
             address = Address.createFromRawAddress(
@@ -64,6 +63,7 @@ export default class extends ProfileCommand {
             accountHttp,
             new MosaicHttp(profile.url),
         );
+       
         accountHttp.getAccountInfo(address)
             .pipe(
                 mergeMap((accountInfo: AccountInfo) => mosaicService.mosaicsAmountViewFromAddress(address)
@@ -82,7 +82,7 @@ export default class extends ProfileCommand {
                 text += '-'.repeat('Account:\t'.length + address.pretty().length) + '\n\n';
                 text += 'Address:\t' + accountInfo.address.pretty() + '\n';
                 text += 'at height:\t' + accountInfo.addressHeight.compact() + '\n\n';
-                text += 'PublicKey:\t' + accountInfo.publicKey + '\n';
+                text += 'PublicKey:\t' + profile.account.publicKey + '\n';
                 text += 'at height:\t' + accountInfo.publicKeyHeight.compact()  + '\n\n';
                 if(accountInfo.importance){
                     text += 'Importance:\t' + accountInfo.importance.compact() + '\n';
