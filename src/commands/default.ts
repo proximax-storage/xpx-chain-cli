@@ -15,15 +15,16 @@
  * limitations under the License.
  *
  */
-
+const pkg = require('../../../package.json');
 export const description = `
                    ____               _  _           
 __  __.____ __  __|_   )         ___ | |(_)         
 \\ \\/ /|  _ \\\\ \\/ /  ) /   ____  / __|| || |    
  >  < | |_) )>  <  / /__ |____|| (__ | || |         
 /_/\\_\\|  __//_/\\_\\/_____|       \\___||_||_|    
-      |_|                            
-`;
+      |_|                             
+                                     v${pkg.version}
+      `;
 
 export const subcommands = [
     {
