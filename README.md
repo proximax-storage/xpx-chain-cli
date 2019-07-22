@@ -8,11 +8,11 @@ This tool will enable you perform the most common and regular used actions in NE
 
 ## Installation
 
-The nem2-cli is distributed using the node package manager npm.
+The xpx2-cli is distributed using the node package manager npm.
 
 `npm install xpx2-cli -g`
 
-The nem2-cli works on NodeJS versions:
+The xpx2-cli works on NodeJS versions:
 
 - 8.9.X
 - 9.X.X
