@@ -39,7 +39,7 @@ export abstract class ProfileCommand extends Command {
             return this.profileService.findProfileNamed(profileName);
         } catch (err) {
             throw new ExpectedError(options.profile ? ('No profile found with name: ' + options.profile) :
-                'To start using the nem2-cli create a default profile using: nem2-cli profile create --privatekey your_private_key' +
+                'To start using the xpx2-cli create a default profile using: xpx2-cli profile create --privatekey your_private_key' +
                 ' --network network --url http://localhost:3000');
         }
     }

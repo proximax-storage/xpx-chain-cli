@@ -1,6 +1,6 @@
 {
   "name": "xpx2-cli",
-  "version": "0.9.7",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,10 +23,10 @@
       "email": "guillem@nemeurope.eu"
     }
   ],
-  "bugs": "https://github.com/nemtech/nem2-cli/issues",
+  "bugs": "https://github.com/proximax-storage/xpx-chain-cli/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nemtech/nem2-cli.git"
+    "url": "https://github.com/proximax-storage/xpx-chain-cli.git"
   },
   "license": "APACHE-2.0",
   "dependencies": {
