@@ -24,7 +24,7 @@ import {MosaicsResolver} from '../../resolvers/mosaic.resolver'
 import {PublicKeyResolver} from '../../resolvers/publicKey.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {Address, Deadline, EmptyMessage, NamespaceId, PlainMessage, TransferTransaction} from 'symbol-sdk'
+import {Address, Deadline, EmptyMessage, NamespaceId, PlainMessage, TransferTransaction} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {
@@ -87,8 +87,8 @@ export default class extends AnnounceTransactionsCommand {
             const rawMessage = await new MessageResolver().resolve(options)
             message = account.encryptMessage(
                 rawMessage,
-                recipientPublicAccount,
-                profile.networkType)
+                recipientPublicAccount
+                )
         } else {
             recipientAddress =  await new AddressAliasResolver()
                 .resolve(options, undefined, 'Enter the recipient address or @alias:', 'recipientAddress')

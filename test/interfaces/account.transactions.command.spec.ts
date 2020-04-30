@@ -1,6 +1,6 @@
 import {AccountTransactionsOptions} from '../../src/interfaces/account.transactions.command'
 import {expect} from 'chai'
-import {Order} from 'symbol-sdk'
+import {Order} from 'tsjs-xpx-chain-sdk'
 
 describe('Announce Transactions Command', () => {
 

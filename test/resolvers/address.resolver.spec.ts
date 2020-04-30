@@ -17,7 +17,7 @@
  */
 import {AddressAliasResolver, AddressResolver} from '../../src/resolvers/address.resolver'
 import {expect} from 'chai'
-import {Address, NamespaceId} from 'symbol-sdk'
+import {Address, NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 describe('Address resolver', () => {
 

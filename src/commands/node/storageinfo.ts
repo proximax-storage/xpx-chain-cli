@@ -21,11 +21,11 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata} from 'clime'
-import {NodeHttp, StorageInfo} from 'symbol-sdk'
+import {NodeHttp, DiagnosticHttp, BlockchainStorageInfo} from 'tsjs-xpx-chain-sdk'
 
 export class StorageTable {
     private readonly table: HorizontalTable
-    constructor(public readonly storage: StorageInfo) {
+    constructor(public readonly storage: BlockchainStorageInfo) {
         this.table = new Table({
             style: {head: ['cyan']},
             head: ['Property', 'Value'],
@@ -60,8 +60,8 @@ export default class extends ProfileCommand {
         const profile = this.getProfile(options)
 
         this.spinner.start()
-        const nodeHttp = new NodeHttp(profile.url)
-        nodeHttp.getStorageInfo()
+        const diagnosticHttp = new DiagnosticHttp(profile.url)
+        diagnosticHttp.getDiagnosticStorage()
             .subscribe((storage) => {
                 this.spinner.stop(true)
                 console.log(new StorageTable(storage).toString())

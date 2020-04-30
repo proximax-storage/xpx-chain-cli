@@ -2,7 +2,7 @@ import {MosaicMetadataView} from '../../../../../src/views/transactions/details/
 import {account1} from '../../../../mocks/accounts.mock'
 import {mosaicId1} from '../../../../mocks/mosaics.mock'
 import {unsignedMosaicMetadata1} from '../../../../mocks/transactions/mosaicMetadata.mock'
-import {Convert} from 'symbol-sdk'
+import {Convert} from 'tsjs-xpx-chain-sdk'
 import {expect} from 'chai'
 
 describe('MosaicMetadataView', () => {

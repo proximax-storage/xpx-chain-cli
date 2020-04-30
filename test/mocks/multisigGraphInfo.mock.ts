@@ -16,7 +16,7 @@
  *
  */
 
-import {MultisigAccountGraphInfo, MultisigAccountInfo, NetworkType, PublicAccount} from 'symbol-sdk'
+import {MultisigAccountGraphInfo, MultisigAccountInfo, NetworkType, PublicAccount} from 'tsjs-xpx-chain-sdk'
 
 export const multisigGraphInfoPublicAccount1 = PublicAccount.createFromPublicKey(
  'B694186EE4AB0558CA4AFCFDD43B42114AE71094F5A1FC4A913FE9971CACD21D', NetworkType.MIJIN_TEST)

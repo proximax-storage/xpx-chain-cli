@@ -23,7 +23,7 @@ import {PasswordResolver} from '../../resolvers/password.resolver'
 import {PrivateKeyResolver} from '../../resolvers/privateKey.resolver'
 import {ProfileNameResolver} from '../../resolvers/profile.resolver'
 import {URLResolver} from '../../resolvers/url.resolver'
-import {SimpleWallet} from 'symbol-sdk'
+import {SimpleWallet} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 import chalk from 'chalk'
 

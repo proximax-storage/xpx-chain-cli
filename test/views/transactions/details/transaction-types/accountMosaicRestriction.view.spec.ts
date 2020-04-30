@@ -9,6 +9,6 @@ describe('AccountMosaicRestrictionView', () => {
   expect(view['Account restriction flag']).equal('AllowMosaic')
   expect(view['Addition 1 of 1']).equal(mosaicId1.toHex())
   expect(view['Deletion 1 of 2']).equal(mosaicId2.toHex())
-  expect(view['Deletion 2 of 2']).equal('symbol.xym (E74B99BA41F4AFEE)')
+  expect(view['Deletion 2 of 2']).equal('prx.xpx (BFFB42A19116BDF6)')
  })
 })

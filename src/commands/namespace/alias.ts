@@ -19,7 +19,7 @@ import {ProfileCommand, ProfileOptions} from '../../interfaces/profile.command'
 import {NamespaceNameResolver} from '../../resolvers/namespace.resolver'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import {command, metadata, option} from 'clime'
-import {NamespaceHttp} from 'symbol-sdk'
+import {NamespaceHttp} from 'tsjs-xpx-chain-sdk'
 import {forkJoin, of} from 'rxjs'
 import {catchError} from 'rxjs/operators'
 

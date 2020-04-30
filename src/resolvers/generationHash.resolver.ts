@@ -1,6 +1,6 @@
 import {CreateProfileOptions} from '../interfaces/create.profile.command'
 import {Resolver} from './resolver'
-import {BlockHttp, UInt64} from 'symbol-sdk'
+import {BlockHttp} from 'tsjs-xpx-chain-sdk'
 import {ExpectedError} from 'clime'
 
 /**
@@ -18,9 +18,9 @@ export class GenerationHashResolver implements Resolver {
         const blockHttp = new BlockHttp(options.url)
         try {
             generationHash = options.generationHash
-                ? options.generationHash : (await blockHttp.getBlockByHeight(UInt64.fromUint(1)).toPromise()).generationHash
+                ? options.generationHash : (await blockHttp.getBlockByHeight(1).toPromise()).generationHash
         } catch (ignored) {
-            throw new ExpectedError('Check if you can reach the Symbol url provided: ' + options.url + '/block/1')
+            throw new ExpectedError('Check if you can reach the ProximaX url provided: ' + options.url + '/block/1')
         }
         return generationHash
     }

@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {NetworkType, PublicAccount} from 'symbol-sdk'
+import {NetworkType, PublicAccount} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Public key validator

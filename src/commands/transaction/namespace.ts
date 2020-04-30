@@ -22,7 +22,7 @@ import {MaxFeeResolver} from '../../resolvers/maxFee.resolver'
 import {NamespaceNameStringResolver, NamespaceTypeResolver} from '../../resolvers/namespace.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {Deadline, NamespaceRegistrationTransaction, NamespaceRegistrationType} from 'symbol-sdk'
+import {Deadline, RegisterNamespaceTransaction, NamespaceType} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {
@@ -78,15 +78,15 @@ export default class extends AnnounceTransactionsCommand {
         const namespaceType = await new NamespaceTypeResolver().resolve(options)
         const maxFee = await new MaxFeeResolver().resolve(options)
 
-        let transaction: NamespaceRegistrationTransaction
-        if (namespaceType === NamespaceRegistrationType.RootNamespace) {
+        let transaction: RegisterNamespaceTransaction
+        if (namespaceType === NamespaceType.RootNamespace) {
             const duration = await new DurationResolver().resolve(options)
-            transaction = NamespaceRegistrationTransaction.createRootNamespace(
+            transaction = RegisterNamespaceTransaction.createRootNamespace(
                 Deadline.create(), name, duration, profile.networkType, maxFee)
         } else {
             const parentName = await new NamespaceNameStringResolver()
                 .resolve(options, 'Enter the parent namespace name:', 'parentName')
-            transaction = NamespaceRegistrationTransaction.createSubNamespace(
+            transaction = RegisterNamespaceTransaction.createSubNamespace(
                 Deadline.create(), name, parentName, profile.networkType, maxFee)
         }
         const signedTransaction = account.sign(transaction, profile.networkGenerationHash)

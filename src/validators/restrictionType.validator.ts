@@ -16,23 +16,7 @@
  *
  */
 import {Validator} from 'clime'
-import {AccountRestrictionFlags, MosaicRestrictionType} from 'symbol-sdk'
-
-/**
- * Validator of mosaic restriction type
- */
-export class MosaicRestrictionTypeValidator implements Validator<string> {
-    /**
-     * Validates if a mosaic restriction type is valid.
-     * @param {number} value - Mosaic restriction type.
-     * @returns {true | string}
-     */
-    validate(value: string): boolean | string {
-        const keys = Object.keys(MosaicRestrictionType)
-            .filter((key) => Number.isNaN(parseFloat(key)))
-        return keys.includes(value) ? true : 'MosaicRestrictionType must be one of (' + keys + ').'
-    }
-}
+import { RestrictionType } from 'tsjs-xpx-chain-sdk'
 
 /**
  * Validator of account restriction flag
@@ -44,8 +28,8 @@ export class AccountRestrictionFlagsValidator implements Validator<string> {
      * @returns {true | string}
      */
     validate(value: string): boolean | string {
-        const keys = Object.keys(AccountRestrictionFlags)
+        const keys = Object.keys(RestrictionType)
             .filter((key) => Number.isNaN(parseFloat(key)))
-        return keys.includes(value) ? true : 'AccountRestrictionFlags must be one of (' + keys + ').'
+        return keys.includes(value) ? true : 'RestrictionType must be one of (' + keys + ').'
     }
 }

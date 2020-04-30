@@ -2,7 +2,7 @@ import {CommandOptions} from '../commands/transaction/namespace'
 import {OptionsConfirmResolver, OptionsResolver} from '../options-resolver'
 import {NamespaceIdValidator} from '../validators/namespaceId.validator'
 import {Resolver} from './resolver'
-import {NamespaceId, NamespaceRegistrationType, UInt64} from 'symbol-sdk'
+import {NamespaceId, UInt64, NamespaceType} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**
@@ -83,9 +83,9 @@ export class NamespaceTypeResolver  implements Resolver {
      * Resolves the namespace type.
      * @param {Options} options - Command options.
      * @param {string} altText - Alternative text.
-     * @returns {Promise<NamespaceRegistrationType>}
+     * @returns {Promise<NamespaceType>}
      */
-    async resolve(options: CommandOptions, altText?: string): Promise<NamespaceRegistrationType> {
+    async resolve(options: CommandOptions, altText?: string): Promise<NamespaceType> {
         if (!options.subnamespace) {
             const resolution = await OptionsConfirmResolver(options, 'rootnamespace',
                 altText ? altText : 'Do you want to create a root namespace?')
@@ -93,9 +93,9 @@ export class NamespaceTypeResolver  implements Resolver {
                 options.rootnamespace = true
             }
         }
-        let namespaceType = NamespaceRegistrationType.SubNamespace
+        let namespaceType = NamespaceType.SubNamespace
         if (options.rootnamespace) {
-            namespaceType = NamespaceRegistrationType.RootNamespace
+            namespaceType = NamespaceType.RootNamespace
         }
         return namespaceType
     }

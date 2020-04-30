@@ -17,7 +17,7 @@
  */
 import {ProfileCommand, ProfileOptions} from './profile.command'
 import {option} from 'clime'
-import {Order, QueryParams} from 'symbol-sdk'
+import {Order, QueryParams} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Base command class to retrieve transactions from an account.
@@ -67,10 +67,10 @@ export class AccountTransactionsOptions extends ProfileOptions {
      * @returns {QueryParams}
      */
     getQueryParams(): QueryParams {
-        const queryParams = new QueryParams({
-            pageSize: this.pageSize,
-            id: this.id,
-            order: this.order === 'ASC' ? Order.ASC : Order.DESC})
+        const queryParams = new QueryParams(
+            this.pageSize,
+            this.id,
+            this.order === 'ASC' ? Order.ASC : Order.DESC)
         return queryParams
     }
 }

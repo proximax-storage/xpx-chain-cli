@@ -23,7 +23,7 @@ import {Spinner} from 'cli-spinner'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {Command, ExpectedError, option} from 'clime'
-import {Account, NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {Account, NetworkType, Password, SimpleWallet} from 'tsjs-xpx-chain-sdk'
 
 export class AccountCredentialsTable {
     private readonly table: HorizontalTable
@@ -66,7 +66,7 @@ export abstract class CreateProfileCommand extends Command {
      */
     protected constructor(fileUrl?: string) {
         super()
-        const profileRepository = new ProfileRepository(fileUrl || '.symbolrc.json')
+        const profileRepository = new ProfileRepository(fileUrl || '.proximaxrc.json')
         this.profileService = new ProfileService(profileRepository)
         this.spinner.setSpinnerString('|/-\\')
     }
@@ -109,8 +109,8 @@ export abstract class CreateProfileCommand extends Command {
             this.profileService.setDefaultProfile(profileName)
         } catch (err) {
             throw new ExpectedError('Can\'t set the profile [' + profileName + '] as the default profile.' +
-                'Use \'symbol-cli profile list\' to check whether the profile exist, ' +
-                'if not, use \'symbol-cli profile create\' to create a profile')
+                'Use \'xpx-chain-cli profile list\' to check whether the profile exist, ' +
+                'if not, use \'xpx-chain-cli profile create\' to create a profile')
         }
     }
 }
@@ -122,13 +122,13 @@ export class CreateProfileOptions extends ProfileOptions {
 
     @option({
         flag: 'u',
-        description: '(Optional) When saving profile, provide a Symbol Node URL. Example: http://localhost:3000',
+        description: '(Optional) When saving profile, provide a ProximaX Node URL. Example: http://localhost:3000',
     })
     url: string
 
     @option({
         flag: 'n',
-        description: 'Network Type. (MAIN_NET, TEST_NET, MIJIN, MIJIN_TEST)',
+        description: 'Network Type. (MAIN_NET, TEST_NET, PRIVATE, PRIVATE_TEST, MIJIN, MIJIN_TEST)',
     })
     network: string
 

@@ -18,7 +18,7 @@
 
 import {CellRecord} from './transaction.view'
 import {Cell} from 'cli-table3'
-import {SignedTransaction} from 'symbol-sdk'
+import {SignedTransaction} from 'tsjs-xpx-chain-sdk'
 
 export interface ITransactionViewSignature extends CellRecord {
  SignatureDetailsTitle: Cell;
@@ -52,7 +52,7 @@ export class TransactionSignatureView {
    SignatureDetailsTitle: this.title,
    Payload: this.formattedPayload,
    Hash: this.tx.hash,
-   Signer: this.tx.signerPublicKey,
+   Signer: this.tx.signer,
   }
  }
 

@@ -19,7 +19,7 @@ import {HeightResolver} from '../../resolvers/height.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import {AccountTransactionsCommand, AccountTransactionsOptions} from '../../interfaces/account.transactions.command'
-import {BlockHttp} from 'symbol-sdk'
+import {BlockHttp} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AccountTransactionsOptions {
@@ -48,7 +48,7 @@ export default class extends AccountTransactionsCommand {
 
         this.spinner.start()
         const blockHttp = new BlockHttp(profile.url)
-        blockHttp.getBlockTransactions(height, options.getQueryParams())
+        blockHttp.getBlockTransactions(height.compact(), options.getQueryParams())
             .subscribe((transactions) => {
                 this.spinner.stop(true)
 

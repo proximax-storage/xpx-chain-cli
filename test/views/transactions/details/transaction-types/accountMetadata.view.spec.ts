@@ -1,7 +1,7 @@
 import {AccountMetadataView} from '../../../../../src/views/transactions/details/transaction-types'
 import {account1} from '../../../../mocks/accounts.mock'
 import {unsignedAccountMetadata1} from '../../../../mocks/transactions/accountMetadata.mock'
-import {Convert} from 'symbol-sdk'
+import {Convert} from 'tsjs-xpx-chain-sdk'
 import {expect} from 'chai'
 
 describe('AccountMetadataView', () => {

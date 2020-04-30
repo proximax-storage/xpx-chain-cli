@@ -19,7 +19,7 @@
 import {CellRecord} from '../transaction.view'
 import {transactionDetailViewFactory} from '../transactionDetailViewFactory'
 import {transactionNameFromType} from '../transactionNameFromType'
-import {AggregateTransaction} from 'symbol-sdk'
+import {AggregateTransaction} from 'tsjs-xpx-chain-sdk'
 import {Cell} from 'cli-table3'
 
 export abstract class AggregateView {

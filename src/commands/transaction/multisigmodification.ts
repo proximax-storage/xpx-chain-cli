@@ -26,10 +26,12 @@ import {
     AggregateTransaction,
     Deadline,
     HashLockTransaction,
-    MultisigAccountModificationTransaction,
-    NetworkCurrencyPublic,
     UInt64,
-} from 'symbol-sdk'
+    NetworkCurrencyMosaic,
+    ModifyMultisigAccountTransaction,
+    MultisigCosignatoryModification,
+    MultisigCosignatoryModificationType,
+} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 import chalk from 'chalk'
 import {DeltaResolver} from '../../resolvers/delta.resolver'
@@ -97,12 +99,14 @@ export default class extends AnnounceTransactionsCommand {
         const maxFeeHashLock = await new MaxFeeResolver().resolve(options,
             'Enter the maximum fee to announce the hashlock transaction (absolute amount):', 'maxFeeHashLock')
 
-        const multisigAccountModificationTransaction = MultisigAccountModificationTransaction.create(
+        const multisigAccountModificationTransaction = ModifyMultisigAccountTransaction.create(
             Deadline.create(),
             minApprovalDelta,
             minRemovalDelta,
-            (action === ActionType.Add) ? cosignatories : [],
-            (action === ActionType.Remove) ? cosignatories : [],
+            cosignatories.map(cosignatory =>
+                new MultisigCosignatoryModification(action === ActionType.Add ? MultisigCosignatoryModificationType.Add : MultisigCosignatoryModificationType.Remove,
+                    cosignatory)
+            ),
             profile.networkType)
 
         const aggregateTransaction = AggregateTransaction.createBonded(
@@ -117,7 +121,7 @@ export default class extends AnnounceTransactionsCommand {
 
         const hashLockTransaction = HashLockTransaction.create(
             Deadline.create(),
-            NetworkCurrencyPublic.createRelative(UInt64.fromNumericString(options.amount)),
+            NetworkCurrencyMosaic.createRelative(UInt64.fromNumericString(options.amount)),
             UInt64.fromNumericString(options.duration),
             signedTransaction,
             profile.networkType,

@@ -22,7 +22,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {AccountHttp, MosaicHttp, MosaicService, MosaicView} from 'symbol-sdk'
+import {AccountHttp, MosaicHttp, MosaicService, MosaicView, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -40,13 +40,13 @@ export class MosaicViewTable {
             head: ['Property', 'Value'],
         }) as HorizontalTable
         this.table.push(
-            ['Id', mosaicView.mosaicInfo.id.toHex()],
+            ['Id', mosaicView.mosaicInfo.mosaicId.toHex()],
             ['Divisibility', mosaicView.mosaicInfo.divisibility],
             ['Transferable', mosaicView.mosaicInfo.isTransferable()],
             ['Supply Mutable',  mosaicView.mosaicInfo.isSupplyMutable()],
             ['Height', mosaicView.mosaicInfo.height.toString()],
-            ['Expiration', mosaicView.mosaicInfo.duration.compact() === 0 ?
-                'Never' : (mosaicView.mosaicInfo.height.add(mosaicView.mosaicInfo.duration)).toString()],
+            ['Expiration', (mosaicView.mosaicInfo.duration ? mosaicView.mosaicInfo.duration.compact() : 0) === 0 ?
+                'Never' : (mosaicView.mosaicInfo.height.add(mosaicView.mosaicInfo.duration || new UInt64([0, 0]))).toString()],
             ['Owner', mosaicView.mosaicInfo.owner.address.pretty()],
             ['Supply (Absolute)', mosaicView.mosaicInfo.supply.toString()],
             ['Supply (Relative)', mosaicView.mosaicInfo.divisibility === 0 ? mosaicView.mosaicInfo.supply.compact().toLocaleString()

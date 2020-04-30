@@ -17,7 +17,7 @@
  */
 import {MosaicFlagsResolver, MosaicIdAliasResolver, MosaicIdResolver, MosaicsResolver} from '../../src/resolvers/mosaic.resolver'
 import {expect} from 'chai'
-import {NamespaceId} from 'symbol-sdk'
+import {NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 describe('Mosaic id resolver', () => {
 

@@ -19,7 +19,7 @@ import {ProfileCommand, ProfileOptions} from '../../interfaces/profile.command'
 import {HeightResolver} from '../../resolvers/height.resolver'
 import {ReceiptService} from '../../services/receipt.service'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
-import {ReceiptHttp} from 'symbol-sdk'
+import {BlockHttp} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends ProfileOptions {
@@ -47,8 +47,8 @@ export default class extends ProfileCommand {
         const height =  await new HeightResolver().resolve(options)
 
         this.spinner.start()
-        const receiptHttp = new ReceiptHttp(profile.url)
-        receiptHttp.getBlockReceipts(height)
+        const blockHttp = new BlockHttp(profile.url)
+        blockHttp.getBlockReceipts(height.compact())
             .subscribe((statement: any) => {
                 this.spinner.stop(true)
                 let txt = ''

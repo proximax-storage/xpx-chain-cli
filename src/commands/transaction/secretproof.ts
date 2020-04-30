@@ -23,7 +23,7 @@ import {ProofResolver} from '../../resolvers/proof.resolver'
 import {SecretResolver} from '../../resolvers/secret.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {Deadline, SecretProofTransaction} from 'symbol-sdk'
+import {Deadline, SecretProofTransaction, Address} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {
@@ -77,7 +77,7 @@ export default class extends AnnounceTransactionsCommand {
             Deadline.create(),
             hashAlgorithm,
             secret,
-            recipientAddress,
+            recipientAddress as Address,
             proof,
             profile.networkType,
             maxFee)

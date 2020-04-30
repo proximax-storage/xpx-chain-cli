@@ -22,7 +22,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {TransactionHttp, TransactionStatus} from 'symbol-sdk'
+import {TransactionHttp, TransactionStatus} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -43,9 +43,9 @@ export class TransactionStatusTable {
             ['Group', status.group],
             ['Hash', status.hash],
         )
-        if (status.code) {
+        if (status.status) {
             this.table.push(
-                ['Status Code', status.code],
+                ['Status Code', status.status],
             )
         }
         if (status.deadline) {

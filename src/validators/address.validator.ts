@@ -17,7 +17,7 @@
  */
 import {AccountService} from '../services/account.service'
 import {Validator} from './validator'
-import {Address} from 'symbol-sdk'
+import {Address} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Address validator

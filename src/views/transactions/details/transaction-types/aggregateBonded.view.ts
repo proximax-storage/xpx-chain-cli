@@ -18,7 +18,7 @@
 
 import {CellRecord} from '../transaction.view'
 import {AggregateView} from './aggregate.view'
-import {AggregateTransaction} from 'symbol-sdk'
+import {AggregateTransaction} from 'tsjs-xpx-chain-sdk'
 
 export class AggregateBondedView extends AggregateView {
   /**

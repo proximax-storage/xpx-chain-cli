@@ -18,21 +18,67 @@
 
 import {NamespacesView} from '../../../namespaces.view'
 import {CellRecord} from '../transaction.view'
-import {NamespaceMetadataTransaction} from 'symbol-sdk'
+import {ModifyMetadataTransaction, NamespaceId, MetadataModification, MetadataModificationType} from 'tsjs-xpx-chain-sdk'
 
 export class NamespaceMetadataView {
   /**
    * @static
-   * @param {NamespaceMetadataTransaction} tx
+   * @param {ModifyMetadataTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: NamespaceMetadataTransaction): CellRecord {
+  static get(tx: ModifyMetadataTransaction): CellRecord {
+    return new NamespaceMetadataView(tx).render();
+  }
+
+  /**
+   * Creates an instance of NamespaceMetadataView.
+   * @param {ModifyMetadataTransaction} tx
+   */
+  private constructor(private readonly tx: ModifyMetadataTransaction) {}
+
+  /**
+   * @private
+   * @returns {CellRecord}
+   */
+  private render(): CellRecord {
     return {
-      'Target public key': tx.targetPublicKey,
-      'Scoped metadata key': tx.scopedMetadataKey.toHex(),
-      'Target namespace Id': NamespacesView.getNamespaceLabel(tx.targetNamespaceId),
-      'Value size delta': tx.valueSizeDelta.toString(),
-      'Value': tx.value,
+      'Namespace': NamespacesView.getNamespaceLabel(new NamespaceId(this.tx.metadataId)),
+      ...this.getModifications(),
+    }
+  }
+
+  /**
+   * @private
+   * @returns {CellRecord}
+   */
+  private getModifications(): CellRecord {
+    const numberOfModifications = this.tx.modifications.length
+    return {
+      ...this.tx.modifications.reduce((mod, modification, index) => ({
+        ...mod,
+        ...this.renderModifications(
+          modification, index, numberOfModifications
+        ),
+      }), {})
+    }
+  }
+
+  /**
+   * @private
+   * @param {MetadataModification} modification
+   * @param {number} index
+   * @param {number} numberOfModifications
+   * @returns {CellRecord}
+   */
+  private renderModifications(
+    modification: MetadataModification,
+    index: number,
+    numberOfModifications: number,
+  ): CellRecord {
+    const key = `${modification.type === MetadataModificationType.ADD ? 'Addition' : 'Deletion'} ${index + 1} of ${numberOfModifications}`
+    return {
+      [key]: modification.key,
+      'Value': modification.value
     }
   }
 }

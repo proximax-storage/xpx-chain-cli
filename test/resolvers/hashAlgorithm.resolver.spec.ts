@@ -17,7 +17,7 @@
  */
 import {HashAlgorithmResolver} from '../../src/resolvers/hashAlgorithm.resolver'
 import {expect} from 'chai'
-import {HashType} from 'symbol-sdk'
+import {HashType} from 'tsjs-xpx-chain-sdk'
 
 describe('Hash algorithm resolver', () => {
 

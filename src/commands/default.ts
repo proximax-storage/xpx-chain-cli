@@ -18,8 +18,8 @@
 
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../../../package.json')
-export const description = `Symbol CLI v${pkg.version}`
+const pkg = require('../../package.json')
+export const description = `ProximaX CLI v${pkg.version}`
 
 export const subcommands = [
     {

@@ -1,6 +1,6 @@
 import {TransactionSignatureView} from '../../../../src/views/transactions/details/transaction.signature.view'
 import {expect} from 'chai'
-import {NetworkType, SignedTransaction, TransactionType} from 'symbol-sdk'
+import {NetworkType, SignedTransaction, TransactionType} from 'tsjs-xpx-chain-sdk'
 
 const mockSignedTransaction = new SignedTransaction(
     '0'.repeat(64),

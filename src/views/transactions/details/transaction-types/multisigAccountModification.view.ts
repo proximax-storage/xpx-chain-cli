@@ -17,23 +17,23 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {CosignatoryModificationAction, MultisigAccountModificationTransaction} from 'symbol-sdk'
+import {ModifyMultisigAccountTransaction, MultisigCosignatoryModificationType} from 'tsjs-xpx-chain-sdk'
 
 export class MultisigAccountModificationView {
   /**
    * @static
-   * @param {MultisigAccountModificationTransaction} tx
+   * @param {ModifyMultisigAccountTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: MultisigAccountModificationTransaction): CellRecord {
+  static get(tx: ModifyMultisigAccountTransaction): CellRecord {
     return new MultisigAccountModificationView(tx).render()
   }
 
   /**
    * Creates an instance of MultisigAccountModificationView.
-   * @param {MultisigAccountModificationTransaction} tx
+   * @param {ModifyMultisigAccountTransaction} tx
    */
-  private constructor(private readonly tx: MultisigAccountModificationTransaction) {}
+  private constructor(private readonly tx: ModifyMultisigAccountTransaction) {}
 
   /**
    * @private
@@ -43,43 +43,25 @@ export class MultisigAccountModificationView {
     return {
       'Min approval delta': `${this.tx.minApprovalDelta}`,
       'Min removal delta': `${this.tx.minRemovalDelta}`,
-      ...this.getModifications(),
+      ...this.renderModifications(),
     }
   }
 
   /**
    * @private
+   * @param {MultisigCosignatoryModificationType} type
    * @returns {CellRecord}
    */
-  private getModifications(): CellRecord {
-    return {
-      ...this.renderModifications(CosignatoryModificationAction.Add),
-      ...this.renderModifications(CosignatoryModificationAction.Remove),
-    }
-  }
-
-  /**
-   * @private
-   * @param {CosignatoryModificationAction} type
-   * @returns {CellRecord}
-   */
-  private renderModifications(type: CosignatoryModificationAction): CellRecord {
-    const targetProperty = type === CosignatoryModificationAction.Add
-      ? 'publicKeyAdditions' : 'publicKeyDeletions'
-
-    const targetPropertyName = type === CosignatoryModificationAction.Add
-      ? 'Public key addition' : 'Public key deletion'
-
-    const modifications = this.tx[targetProperty]
-    const modificationNumber = modifications.length
+  private renderModifications(): CellRecord {
+    const modificationNumber = this.tx.modifications.length
 
     if (modificationNumber === 0) {return {} }
 
-    const getKey = (index: number) => `${targetPropertyName} (${index + 1} / ${modificationNumber})`
+    const getKey = (index: number, type: MultisigCosignatoryModificationType) => `${type === MultisigCosignatoryModificationType.Add ? 'Public key addition' : 'Public key deletion'} (${index + 1} / ${modificationNumber})`
 
-    return modifications.reduce((acc, publicAccount, index) => ({
-      ...acc,
-      [getKey(index)]: publicAccount.address.pretty(),
+    return this.tx.modifications.reduce((mod, modification, index) => ({
+      ...mod,
+      [getKey(index, modification.type)]: modification.cosignatoryPublicAccount.address.pretty(),
     }), {})
   }
 }

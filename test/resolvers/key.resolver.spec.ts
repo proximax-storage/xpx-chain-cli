@@ -17,7 +17,7 @@
  */
 import {KeyResolver} from '../../src/resolvers/key.resolver'
 import {expect} from 'chai'
-import {KeyGenerator} from 'symbol-sdk'
+import {KeyGenerator} from 'tsjs-xpx-chain-sdk'
 
 describe('Key resolver', () => {
 

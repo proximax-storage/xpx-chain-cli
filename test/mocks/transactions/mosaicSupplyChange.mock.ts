@@ -17,12 +17,12 @@
  */
 
 import {mosaicId1} from '../mosaics.mock'
-import {Deadline, MosaicSupplyChangeAction, MosaicSupplyChangeTransaction, NetworkType, UInt64} from 'symbol-sdk'
+import {Deadline, MosaicSupplyType, MosaicSupplyChangeTransaction, NetworkType, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedMosaicSupplyChange1 = MosaicSupplyChangeTransaction.create(
  Deadline.create(),
  mosaicId1,
- MosaicSupplyChangeAction.Increase,
+ MosaicSupplyType.Increase,
  UInt64.fromUint(10),
  NetworkType.MIJIN_TEST,
  new UInt64([1, 0]),

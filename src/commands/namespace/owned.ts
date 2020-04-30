@@ -19,7 +19,7 @@ import {ProfileCommand, ProfileOptions} from '../../interfaces/profile.command'
 import {AddressResolver} from '../../resolvers/address.resolver'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import {NamespaceInfoTable} from './info'
-import {NamespaceHttp} from 'symbol-sdk'
+import {NamespaceHttp} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends ProfileOptions {

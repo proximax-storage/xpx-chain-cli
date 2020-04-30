@@ -1,8 +1,8 @@
 import {OptionsChoiceResolver} from '../options-resolver'
-import {ActionValidator, LinkActionValidator, MosaicSupplyChangeActionValidator} from '../validators/action.validator'
+import {ActionValidator, LinkActionValidator, MosaicSupplyTypeValidator} from '../validators/action.validator'
 import {ActionType} from '../models/action.enum'
 import {Resolver} from './resolver'
-import {LinkAction, MosaicSupplyChangeAction} from 'symbol-sdk'
+import {LinkAction, MosaicSupplyType} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**
@@ -80,11 +80,11 @@ export class SupplyActionResolver implements Resolver {
      */
     async resolve(options: Options, altText?: string, altKey?: string): Promise<number> {
         const choices = Object
-            .keys(MosaicSupplyChangeAction)
+            .keys(MosaicSupplyType)
             .filter((key) => Number.isNaN(parseFloat(key)))
             .map((string) => ({
                 title: string,
-                value: MosaicSupplyChangeAction[string as any],
+                value: MosaicSupplyType[string as any],
             }))
 
         const value = +(await OptionsChoiceResolver(options,
@@ -92,7 +92,7 @@ export class SupplyActionResolver implements Resolver {
             altText ? altText : 'Select an action:',
             choices,
             'select',
-            new MosaicSupplyChangeActionValidator()
+            new MosaicSupplyTypeValidator()
         ))
         return value
     }

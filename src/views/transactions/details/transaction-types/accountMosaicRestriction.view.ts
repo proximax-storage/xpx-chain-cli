@@ -18,23 +18,23 @@
 
 import {MosaicsView} from '../../../mosaics.view'
 import {CellRecord} from '../transaction.view'
-import {AccountMosaicRestrictionTransaction, AccountRestrictionFlags, MosaicId, NamespaceId} from 'symbol-sdk'
+import {AccountMosaicRestrictionModificationTransaction, RestrictionType, MosaicId, NamespaceId, AccountRestrictionModification, Mosaic, RestrictionModificationType} from 'tsjs-xpx-chain-sdk'
 
 export class AccountMosaicRestrictionView {
   /**
    * @static
-   * @param {AccountMosaicRestrictionTransaction} tx
+   * @param {AccountMosaicRestrictionModificationTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: AccountMosaicRestrictionTransaction): CellRecord {
+  static get(tx: AccountMosaicRestrictionModificationTransaction): CellRecord {
     return new AccountMosaicRestrictionView(tx).render()
   }
 
   /**
    * Creates an instance of AccountMosaicRestrictionView.
-   * @param {AccountMosaicRestrictionTransaction} tx
+   * @param {AccountMosaicRestrictionModificationTransaction} tx
    */
-  private constructor(private readonly tx: AccountMosaicRestrictionTransaction) {}
+  private constructor(private readonly tx: AccountMosaicRestrictionModificationTransaction) {}
 
   /**
    * @private
@@ -42,7 +42,7 @@ export class AccountMosaicRestrictionView {
    */
   private render(): CellRecord {
     return {
-      'Account restriction flag': AccountRestrictionFlags[this.tx.restrictionFlags],
+      'Account restriction type': RestrictionType[this.tx.restrictionType],
       ...this.getRestrictions(),
     }
   }
@@ -52,39 +52,30 @@ export class AccountMosaicRestrictionView {
    * @returns {CellRecord}
    */
   private getRestrictions(): CellRecord {
-    const numberOfAdditions = this.tx.restrictionAdditions.length
-    const numberOfDeletions = this.tx.restrictionDeletions.length
+    const numberOfModifications = this.tx.modifications.length
     return {
-      ...this.tx.restrictionAdditions.reduce((acc, mosaic, index) => ({
-        ...acc,
+      ...this.tx.modifications.reduce((mod, modification, index) => ({
+        ...mod,
         ...this.renderRestriction(
-          mosaic, index, numberOfAdditions, 'Addition',
+          modification, index, numberOfModifications,
         ),
-      }), {}),
-      ...this.tx.restrictionDeletions.reduce((acc, mosaic, index) => ({
-        ...acc,
-        ...this.renderRestriction(
-          mosaic, index, numberOfDeletions, 'Deletion',
-        ),
-      }), {}),
+      }), {})
     }
   }
 
   /**
    * @private
-   * @param {(MosaicId | NamespaceId)} mosaicId
+   * @param {AccountRestrictionModification<number[]>} modification
    * @param {number} index
    * @param {number} numberOfRestrictions
-   * @param {('Addition' | 'Deletion')} additionOrDeletion
    * @returns {CellRecord}
    */
   private renderRestriction(
-    mosaicId: MosaicId | NamespaceId,
+    modification: AccountRestrictionModification<number[]>,
     index: number,
     numberOfRestrictions: number,
-    additionOrDeletion: 'Addition' | 'Deletion',
   ): CellRecord {
-    const key = `${additionOrDeletion} ${index + 1} of ${numberOfRestrictions}`
-    return {[key]: MosaicsView.getMosaicLabel(mosaicId)}
+    const key = `${modification.modificationType === RestrictionModificationType.Add ? 'Addition' : 'Deletion'} ${index + 1} of ${numberOfRestrictions}`
+    return {[key]: MosaicsView.getMosaicLabel(new MosaicId(modification.value))}
   }
 }

@@ -17,7 +17,7 @@
  */
 
 import {account1} from '../accounts.mock'
-import {AccountMetadataTransaction, Convert, Deadline, NetworkType, UInt64} from 'symbol-sdk'
+import {AccountMetadataTransaction, Convert, Deadline, NetworkType, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedAccountMetadata1 = AccountMetadataTransaction.create(
  Deadline.create(),

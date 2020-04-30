@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {MosaicId, NamespaceId} from 'symbol-sdk'
+import {MosaicId, NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Mosaic id validator

@@ -1,7 +1,7 @@
 import {AccountLinkView} from '../../../../../src/views/transactions/details/transaction-types'
 import {account1} from '../../../../mocks/accounts.mock'
 import {unsignedAccountLink1} from '../../../../mocks/transactions/accountLink.mock'
-import {LinkAction} from 'symbol-sdk'
+import {LinkAction} from 'tsjs-xpx-chain-sdk'
 import {expect} from 'chai'
 
 describe('AccountLinkView', () => {

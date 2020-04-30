@@ -29,9 +29,9 @@ import {
     MosaicHttp,
     MosaicService,
     MultisigAccountInfo,
-    MultisigHttp,
     PublicAccount,
-} from 'symbol-sdk'
+    UInt64,
+} from 'tsjs-xpx-chain-sdk'
 import {forkJoin, of} from 'rxjs'
 import {catchError, mergeMap, toArray} from 'rxjs/operators'
 
@@ -55,8 +55,6 @@ export class AccountInfoTable {
             ['Address Height', accountInfo.addressHeight.toString()],
             ['Public Key', accountInfo.publicKey],
             ['Public Key Height', accountInfo.publicKeyHeight.toString()],
-            ['Importance', accountInfo.importance.toString()],
-            ['Importance Height', accountInfo.importanceHeight.toString()],
         )
     }
 
@@ -82,8 +80,8 @@ export class BalanceInfoTable {
                     [mosaic.fullName(),
                         mosaic.relativeAmount().toLocaleString(),
                         mosaic.amount.toString(),
-                        (mosaic.mosaicInfo.duration.compact() === 0 ?
-                            'Never' : ((mosaic.mosaicInfo.height.add(mosaic.mosaicInfo.duration).toString()))),
+                        ((mosaic.mosaicInfo.duration ? mosaic.mosaicInfo.duration.compact() : 0) === 0 ?
+                            'Never' : ((mosaic.mosaicInfo.height.add(mosaic.mosaicInfo.duration as UInt64).toString()))),
                     ],
                 )
             })
@@ -171,14 +169,15 @@ export default class extends ProfileCommand {
 
         this.spinner.start()
         const accountHttp = new AccountHttp(profile.url)
-        const multisigHttp = new MultisigHttp(profile.url)
         const mosaicHttp = new MosaicHttp(profile.url)
         const mosaicService = new MosaicService(accountHttp, mosaicHttp)
+
+        mosaicService.mosaicsAmountViewFromAddress(address).pipe(mergeMap((_) => _), toArray());
 
         forkJoin(
             accountHttp.getAccountInfo(address),
             mosaicService.mosaicsAmountViewFromAddress(address).pipe(mergeMap((_) => _), toArray()),
-            multisigHttp.getMultisigAccountInfo(address).pipe(catchError((ignored) => of(null))))
+            accountHttp.getMultisigAccountInfo(address).pipe(catchError((ignored) => of(null))))
             .subscribe((res) => {
                 const accountInfo = res[0]
                 const mosaicsInfo = res[1]

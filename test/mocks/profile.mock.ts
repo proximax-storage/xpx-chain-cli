@@ -17,7 +17,7 @@
  */
 
 import {Profile} from '../../src/models/profile.model'
-import {NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {NetworkType, Password, SimpleWallet} from 'tsjs-xpx-chain-sdk'
 
 const simpleWallet1 = SimpleWallet.create('test', new Password('password'), NetworkType.MIJIN_TEST)
 const url1 = 'http://localhost:1234'

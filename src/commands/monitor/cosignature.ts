@@ -20,7 +20,7 @@ import {AddressResolver} from '../../resolvers/address.resolver'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import chalk from 'chalk'
 import {command, metadata} from 'clime'
-import {Listener} from 'symbol-sdk'
+import {Listener} from 'tsjs-xpx-chain-sdk'
 
 @command({
     description: 'Monitor cosignatures added',
@@ -40,7 +40,7 @@ export default class extends MonitorAddressCommand {
         listener.open().then(() => {
             listener.cosignatureAdded(address).subscribe((transaction) => {
                 const transactionFormatted = '\nCosignatureSignedTransaction: ParentHash:' + transaction.parentHash +
-                    ' SignerPublicKey:' + transaction.signerPublicKey +
+                    ' SignerPublicKey:' + transaction.signer +
                     ' Signature:' + transaction.signature
                 console.log(transactionFormatted)
             }, (err) => {

@@ -19,7 +19,7 @@
 import {MosaicsView} from '../../../mosaics.view'
 import {RecipientsView} from '../../../recipients.view'
 import {CellRecord} from '../transaction.view'
-import {HashType, SecretLockTransaction} from 'symbol-sdk'
+import {HashType, SecretLockTransaction} from 'tsjs-xpx-chain-sdk'
 
 export class SecretLockView {
   /**
@@ -29,7 +29,7 @@ export class SecretLockView {
    */
   static get(tx: SecretLockTransaction): CellRecord {
     return {
-      'Recipient': RecipientsView.get(tx.recipientAddress),
+      'Recipient': RecipientsView.get(tx.recipient),
       ...MosaicsView.get([tx.mosaic]),
       'Duration': tx.duration.toString(),
       'Hash type': HashType[tx.hashType],

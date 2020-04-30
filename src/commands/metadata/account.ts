@@ -22,7 +22,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {Metadata, MetadataEntry, MetadataHttp} from 'symbol-sdk'
+import {MetadataHttp, Field} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -35,25 +35,20 @@ export class CommandOptions extends ProfileOptions {
 export class MetadataEntryTable {
     private readonly table: HorizontalTable
 
-    constructor(public readonly entry: MetadataEntry) {
+    constructor(public readonly entry: Field) {
         this.table = new Table({
             style: {head: ['cyan']},
             head: ['Type', 'Value'],
         }) as HorizontalTable
 
         this.table.push(
-            ['Sender Public Key', entry.senderPublicKey],
-            ['Target Public Key', entry.targetPublicKey],
+            ['Key', entry.key],
             ['Value', entry.value],
         )
-        if (entry.targetId) {
-            this.table.push(['Target Id', entry.targetId.toHex()])
-        }
     }
 
     toString(): string {
         let text = ''
-        text += '\n' + chalk.green('Key:' + this.entry.scopedMetadataKey.toHex()) + '\n'
         text += this.table.toString()
         return text
     }
@@ -75,13 +70,13 @@ export default class extends ProfileCommand {
 
         this.spinner.start()
         const metadataHttp = new MetadataHttp(profile.url)
-        metadataHttp.getAccountMetadata(address)
+        metadataHttp.getAccountMetadata(address.plain())
             .subscribe((metadataEntries) => {
                 this.spinner.stop(true)
-                if (metadataEntries.length > 0) {
-                    metadataEntries
-                        .map((entry: Metadata) => {
-                            console.log(new MetadataEntryTable(entry.metadataEntry).toString())
+                if (metadataEntries.fields.length > 0) {
+                    metadataEntries.fields
+                        .map((entry: Field) => {
+                            console.log(new MetadataEntryTable(entry).toString())
                         })
                 } else {
                     console.log('\n The address does not have metadata entries assigned.')

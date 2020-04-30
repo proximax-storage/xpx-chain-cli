@@ -2,7 +2,7 @@ import {Profile} from '../models/profile.model'
 import {OptionsResolver} from '../options-resolver'
 import {PublicKeysValidator, PublicKeyValidator} from '../validators/publicKey.validator'
 import {Resolver} from './resolver'
-import {NetworkType, PublicAccount} from 'symbol-sdk'
+import {NetworkType, PublicAccount} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

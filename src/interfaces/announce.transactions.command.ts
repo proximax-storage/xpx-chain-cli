@@ -19,7 +19,7 @@ import {HttpErrorHandler} from '../services/httpErrorHandler.service'
 import {ProfileCommand, ProfileOptions} from './profile.command'
 import chalk from 'chalk'
 import {option} from 'clime'
-import {Address, Listener, SignedTransaction, Transaction, TransactionAnnounceResponse, TransactionHttp } from 'symbol-sdk'
+import {Address, Listener, SignedTransaction, Transaction, TransactionAnnounceResponse, TransactionHttp } from 'tsjs-xpx-chain-sdk'
 import {merge} from 'rxjs'
 import {filter, mergeMap, tap} from 'rxjs/operators'
 
@@ -75,7 +75,7 @@ export abstract class AnnounceTransactionsCommand extends ProfileCommand {
                     .pipe(
                         filter((error) => error.hash === signedTransaction.hash),
                         tap((error) => {
-                            throw new Error(error.code)
+                            throw new Error(error.status)
                         })))
                 .subscribe((response) => {
                     if (response instanceof TransactionAnnounceResponse) {
@@ -123,7 +123,7 @@ export abstract class AnnounceTransactionsCommand extends ProfileCommand {
                     .pipe(
                         filter((error) => error.hash === signedHashLockTransaction.hash),
                         tap((error) => {
-                            throw new Error(error.code)
+                            throw new Error(error.status)
                         })),
                 listener
                     .confirmed(senderAddress)

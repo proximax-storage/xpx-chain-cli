@@ -18,7 +18,7 @@
 
 import {RecipientsView} from '../../../recipients.view'
 import {CellRecord} from '../transaction.view'
-import {HashType, SecretProofTransaction} from 'symbol-sdk'
+import {HashType, SecretProofTransaction} from 'tsjs-xpx-chain-sdk'
 
 export class SecretProofView {
   /**
@@ -28,7 +28,7 @@ export class SecretProofView {
    */
   static get(tx: SecretProofTransaction): CellRecord {
     return {
-      'Recipient': RecipientsView.get(tx.recipientAddress),
+      'Recipient': RecipientsView.get(tx.recipient),
       'Hash type': HashType[tx.hashType],
       'Secret': tx.secret,
       'Proof': tx.proof,

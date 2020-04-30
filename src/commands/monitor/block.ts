@@ -18,7 +18,7 @@
 import {ProfileCommand, ProfileOptions} from '../../interfaces/profile.command'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import {command, metadata} from 'clime'
-import {Listener} from 'symbol-sdk'
+import {Listener} from 'tsjs-xpx-chain-sdk'
 
 @command({
     description: 'Monitor new blocks',

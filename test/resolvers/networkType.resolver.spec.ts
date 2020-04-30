@@ -17,7 +17,7 @@
  */
 import {NetworkResolver} from '../../src/resolvers/network.resolver'
 import {expect} from 'chai'
-import {NetworkType} from 'symbol-sdk'
+import {NetworkType} from 'tsjs-xpx-chain-sdk'
 
 describe('Network type resolver', () => {
 

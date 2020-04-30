@@ -1,6 +1,6 @@
 import {RestrictionTypeResolver} from '../../src/resolvers/restrictionType.resolver'
 import {expect} from 'chai'
-import {MosaicRestrictionType} from 'symbol-sdk'
+import {MosaicRestrictionType} from 'tsjs-xpx-chain-sdk'
 
 describe('Restriction type resolver', () => {
 

@@ -17,7 +17,7 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {MosaicDefinitionTransaction} from 'symbol-sdk'
+import {MosaicDefinitionTransaction, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export class MosaicDefinitionView {
   /**
@@ -28,11 +28,10 @@ export class MosaicDefinitionView {
   static get(tx: MosaicDefinitionTransaction): CellRecord {
     return {
       ['Mosaic Id']: tx.mosaicId.toHex(),
-      ['Duration']: tx.duration.compact() > 0 ? `${tx.duration.compact().toLocaleString()} blocks` : 'unlimited',
-      ['Divisibility']: `${tx.divisibility}`,
-      ['Supply mutable']: `${tx.flags.supplyMutable}`,
-      ['Transferable']: `${tx.flags.transferable}`,
-      ['Restrictable']: `${tx.flags.restrictable}`,
+      ['Duration']: (tx.mosaicProperties.duration ? tx.mosaicProperties.duration : new UInt64([0,0]).compact()) > 0 ? `${(tx.mosaicProperties.duration ? tx.mosaicProperties.duration : new UInt64([0, 0])).compact().toLocaleString()} blocks` : 'unlimited',
+      ['Divisibility']: `${tx.mosaicProperties.divisibility}`,
+      ['Supply mutable']: `${tx.mosaicProperties.supplyMutable}`,
+      ['Transferable']: `${tx.mosaicProperties.transferable}`,
     }
   }
 }

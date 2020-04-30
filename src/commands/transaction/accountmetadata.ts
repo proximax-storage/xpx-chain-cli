@@ -11,11 +11,13 @@ import {
     Deadline,
     HashLockTransaction,
     MetadataHttp,
-    MetadataTransactionService,
     MetadataType,
-    NetworkCurrencyPublic,
     UInt64,
-} from 'symbol-sdk'
+    NetworkCurrencyMosaic,
+    ModifyMetadataTransaction,
+    MetadataModification,
+    MetadataModificationType,
+} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceAggregateTransactionsOptions {
@@ -59,26 +61,22 @@ export default class extends AnnounceTransactionsCommand {
         const maxFee = await new MaxFeeResolver().resolve(options)
 
         const metadataHttp = new MetadataHttp(profile.url)
-        const metadataTransactionService = new MetadataTransactionService(metadataHttp)
-        const metadataTransaction = await metadataTransactionService
-            .createMetadataTransaction(
+        const metadataTransaction = ModifyMetadataTransaction.createWithAddress(
+            account.address.networkType,
             Deadline.create(),
-            account.networkType,
-            MetadataType.Account,
-            targetAccount,
-            key,
-            value,
-            account.publicAccount,
-            undefined,
-            maxFee,
-        ).toPromise()
+            account.address,
+            [
+                new MetadataModification(MetadataModificationType.ADD, key, value)
+            ],
+            maxFee
+        )
 
         const isAggregateComplete = (targetAccount.publicKey === account.publicKey)
         if (isAggregateComplete) {
             const aggregateTransaction = AggregateTransaction.createComplete(
                 Deadline.create(),
                 [metadataTransaction.toAggregate(account.publicAccount)],
-                account.networkType,
+                account.address.networkType,
                 [],
                 maxFee,
             )
@@ -101,7 +99,7 @@ export default class extends AnnounceTransactionsCommand {
             const aggregateTransaction = AggregateTransaction.createBonded(
                 Deadline.create(),
                 [metadataTransaction.toAggregate(account.publicAccount)],
-                account.networkType,
+                account.address.networkType,
                 [],
                 maxFee,
             )
@@ -111,7 +109,7 @@ export default class extends AnnounceTransactionsCommand {
                 'Enter the maximum fee to announce the hashlock transaction (absolute amount):', 'maxFeeHashLock')
             const hashLockTransaction = HashLockTransaction.create(
                 Deadline.create(),
-                NetworkCurrencyPublic.createRelative(UInt64.fromNumericString(options.amount)),
+                NetworkCurrencyMosaic.createRelative(UInt64.fromNumericString(options.amount)),
                 UInt64.fromNumericString(options.duration),
                 signedTransaction,
                 profile.networkType,

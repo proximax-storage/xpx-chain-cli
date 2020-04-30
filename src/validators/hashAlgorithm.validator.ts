@@ -1,5 +1,5 @@
 import {Validator} from './validator'
-import {HashType} from 'symbol-sdk'
+import {HashType} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Hash algorithm validator

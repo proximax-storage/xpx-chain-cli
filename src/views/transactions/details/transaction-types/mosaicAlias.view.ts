@@ -18,7 +18,7 @@
 
 import {NamespacesView} from '../../../namespaces.view'
 import {CellRecord} from '../transaction.view'
-import {AliasAction, MosaicAliasTransaction} from 'symbol-sdk'
+import {MosaicAliasTransaction, AliasActionType} from 'tsjs-xpx-chain-sdk'
 
 export class MosaicAliasView {
   /**
@@ -28,7 +28,7 @@ export class MosaicAliasView {
    */
   static get(tx: MosaicAliasTransaction): CellRecord {
     return {
-      'Alias action': AliasAction[tx.aliasAction],
+      'Alias action': AliasActionType[tx.actionType],
       'Mosaic Id': tx.mosaicId.toHex(),
       'Namespace Id': NamespacesView.getNamespaceLabel(tx.namespaceId),
     }

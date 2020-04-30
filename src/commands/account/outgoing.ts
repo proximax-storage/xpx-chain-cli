@@ -16,11 +16,12 @@
  *
  */
 import {AccountTransactionsCommand, AccountTransactionsOptions} from '../../interfaces/account.transactions.command'
-import {AddressResolver} from '../../resolvers/address.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
-import {AccountHttp} from 'symbol-sdk'
+import {AccountHttp} from 'tsjs-xpx-chain-sdk'
 import {command, metadata} from 'clime'
+import { PublicKeyResolver } from '../../resolvers/publicKey.resolver'
+import { NetworkResolver } from '../../resolvers/network.resolver'
 
 @command({
     description: 'Fetch outgoing transactions from account',
@@ -34,11 +35,12 @@ export default class extends AccountTransactionsCommand {
     @metadata
     async execute(options: AccountTransactionsOptions) {
         const profile = this.getProfile(options)
-        const address = await new AddressResolver().resolve(options, profile)
+        const networkType = await new NetworkResolver().resolve(options);
+        const publicKey = await new PublicKeyResolver().resolve(options, networkType);
 
         this.spinner.start()
         const accountHttp = new AccountHttp(profile.url)
-        accountHttp.getAccountOutgoingTransactions(address, options.getQueryParams())
+        accountHttp.outgoingTransactions(publicKey, options.getQueryParams())
             .subscribe((transactions) => {
                 this.spinner.stop(true)
                 transactions.forEach((transaction) => {

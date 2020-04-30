@@ -17,23 +17,24 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {AccountOperationRestrictionTransaction, AccountRestrictionFlags, TransactionType} from 'symbol-sdk'
+import {AccountOperationRestrictionModificationTransaction, RestrictionType, TransactionType, AccountRestrictionModification, RestrictionModificationType} from 'tsjs-xpx-chain-sdk'
+import accountaddressrestriction from '../../../../commands/transaction/accountaddressrestriction'
 
 export class AccountOperationRestrictionView {
   /**
    * @static
-   * @param {AccountOperationRestrictionTransaction} tx
+   * @param {AccountOperationRestrictionModificationTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: AccountOperationRestrictionTransaction): CellRecord {
+  static get(tx: AccountOperationRestrictionModificationTransaction): CellRecord {
     return new AccountOperationRestrictionView(tx).render()
   }
 
   /**
    * Creates an instance of AccountOperationRestrictionView.
-   * @param {AccountOperationRestrictionTransaction} tx
+   * @param {AccountOperationRestrictionModificationTransaction} tx
    */
-  private constructor(private readonly tx: AccountOperationRestrictionTransaction) {}
+  private constructor(private readonly tx: AccountOperationRestrictionModificationTransaction) {}
 
   /**
    * @private
@@ -41,7 +42,7 @@ export class AccountOperationRestrictionView {
    */
   private render(): CellRecord {
     return {
-      'Account restriction flag': AccountRestrictionFlags[this.tx.restrictionFlags],
+      'Account restriction type': RestrictionType[this.tx.restrictionType],
       ...this.getRestrictions(),
     }
   }
@@ -51,39 +52,30 @@ export class AccountOperationRestrictionView {
    * @returns {CellRecord}
    */
   private getRestrictions(): CellRecord {
-    const numberOfAdditions = this.tx.restrictionAdditions.length
-    const numberOfDeletions = this.tx.restrictionDeletions.length
+    const numberOfModifications = this.tx.modifications.length
     return {
-      ...this.tx.restrictionAdditions.reduce((acc, transactionType, index) => ({
-        ...acc,
+      ...this.tx.modifications.reduce((mod, modification, index) => ({
+        ...mod,
         ...this.renderRestriction(
-          transactionType, index, numberOfAdditions, 'Addition',
+          modification, index, numberOfModifications
         ),
-      }), {}),
-      ...this.tx.restrictionDeletions.reduce((acc, transactionType, index) => ({
-        ...acc,
-        ...this.renderRestriction(
-          transactionType, index, numberOfDeletions, 'Deletion',
-        ),
-      }), {}),
+      }), {})
     }
   }
 
   /**
    * @private
-   * @param {TransactionType} transactionType
+   * @param {AccountRestrictionModification<TransactionType>} modifications
    * @param {number} index
    * @param {number} numberOfRestrictions
-   * @param {('Addition' | 'Deletion')} additionOrDeletion
    * @returns {CellRecord}
    */
   private renderRestriction(
-    transactionType: TransactionType,
+    modification: AccountRestrictionModification<TransactionType>,
     index: number,
     numberOfRestrictions: number,
-    additionOrDeletion: 'Addition' | 'Deletion',
   ): CellRecord {
-    const key = `${additionOrDeletion} ${index + 1} of ${numberOfRestrictions}`
-    return {[key]: TransactionType[transactionType]}
+    const key = `${modification.modificationType === RestrictionModificationType.Add ? 'Addition' : 'Deletion'} ${index + 1} of ${numberOfRestrictions}`
+    return {[key]: modification.value.toString()}
   }
 }

@@ -33,7 +33,7 @@ export abstract class ProfileCommand extends Command {
      */
     constructor(fileUrl?: string) {
         super()
-        const profileRepository = new ProfileRepository(fileUrl || '.symbolrc.json')
+        const profileRepository = new ProfileRepository(fileUrl || '.proximaxrc.json')
         this.profileService = new ProfileService(profileRepository)
         this.spinner.setSpinnerString('|/-\\')
     }
@@ -52,8 +52,8 @@ export abstract class ProfileCommand extends Command {
             return this.profileService.getDefaultProfile()
         } catch (err) {
             throw new ExpectedError('Can\'t retrieve the current profile.' +
-            'Use \'symbol-cli profile list\' to check whether the profile exist, ' +
-            'if not, use \'symbol-cli profile create\' to create a new profile')
+            'Use \'xpx-chain-cli profile list\' to check whether the profile exist, ' +
+            'if not, use \'xpx-chain-cli profile create\' to create a new profile')
         }
     }
 
@@ -67,7 +67,7 @@ export abstract class ProfileCommand extends Command {
             return this.profileService.getDefaultProfile()
         } catch (err) {
             throw new ExpectedError('Can\'t retrieve the default profile.' +
-                'Use \'symbol-cli profile create\' to create a new default profile')
+                'Use \'xpx-chain-cli profile create\' to create a new default profile')
         }
     }
 

@@ -21,7 +21,7 @@ import {TransactionView} from '../../views/transactions/details/transaction.view
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import chalk from 'chalk'
 import {command, metadata} from 'clime'
-import {AggregateTransaction, BlockInfo, Listener, Transaction, TransactionStatusError} from 'symbol-sdk'
+import {AggregateTransaction, BlockInfo, Listener, Transaction, TransactionStatusError} from 'tsjs-xpx-chain-sdk'
 import {merge} from 'rxjs'
 
 @command({
@@ -59,7 +59,7 @@ export default class extends MonitorAddressCommand {
                         console.log(chalk.green('\nNew block:'), response.height.toString())
                     } else if (response instanceof TransactionStatusError) {
                         console.log(chalk.green('\nTransaction error:'), response.hash)
-                        console.log('\n' + response.code)
+                        console.log('\n' + response.status)
                     }
                 }, (err) => {
                     console.log(HttpErrorHandler.handleError(err))

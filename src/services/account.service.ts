@@ -16,7 +16,7 @@
  *
  */
 
-import {Address, NamespaceId} from 'symbol-sdk'
+import {Address, NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Account service

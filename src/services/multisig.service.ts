@@ -1,5 +1,5 @@
 import {Profile} from '../models/profile.model'
-import {Address, MultisigAccountGraphInfo, MultisigHttp} from 'symbol-sdk'
+import {Address, MultisigAccountGraphInfo, AccountHttp, PublicAccount} from 'tsjs-xpx-chain-sdk'
 import {from, Observable, of} from 'rxjs'
 import {catchError, filter, flatMap, map, switchMap, toArray} from 'rxjs/operators'
 
@@ -29,38 +29,38 @@ export class MultisigService {
  constructor(private readonly profile: Profile) {}
 
  /**
-  * Gets self and children multisig accounts addresses from the network
+  * Gets self and children multisig accounts from the network
   * @public
-  * @returns {Observable<Address[]>}
+  * @returns {Observable<PublicAccount[]>}
   */
- public getSelfAndChildrenAddresses(): Observable<Address[]> {
-  return new MultisigHttp(this.profile.url)
+ public getSelfAndChildrenAccounts(): Observable<PublicAccount[]> {
+  return new AccountHttp(this.profile.url)
    .getMultisigAccountGraphInfo(this.profile.address)
    .pipe(
-    switchMap((graphInfo) => this.getAddressesFromGraphInfo(graphInfo)),
-    catchError((ignored) => of([this.profile.address])),
+    switchMap((graphInfo) => this.getAccountsFromGraphInfo(graphInfo)),
+    catchError((ignored) => of([this.profile.publicAccount])),
    )
  }
 
  /**
-  * Gets self and children multisig accounts addresses from a MultisigAccountGraphInfo
+  * Gets self and children multisig accounts from a MultisigAccountGraphInfo
   * @private
   * @param {MultisigAccountGraphInfo} graphInfo
-  * @returns {Observable<Address[]>}
+  * @returns {Observable<PublicAccount[]>}
   */
- private getAddressesFromGraphInfo(
+ private getAccountsFromGraphInfo(
   graphInfo: MultisigAccountGraphInfo,
- ): Observable<Address[]> {
+ ): Observable<PublicAccount[]> {
   const {multisigAccounts} = graphInfo
   return from(
    [...multisigAccounts.keys()]
-    .sort((a, b) => b - a), // Get addresses from top to bottom
+    .sort((a, b) => b - a), // Get accounts from top to bottom
   )
    .pipe(
     map((key) => multisigAccounts.get(key) || []),
     filter((x) => x.length > 0),
     flatMap((multisigAccountInfo) => multisigAccountInfo),
-    map(({account}) => account.address),
+    map(({account}) => account),
     toArray(),
    )
  }

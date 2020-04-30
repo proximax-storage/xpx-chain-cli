@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {NamespaceId, UInt64} from 'symbol-sdk'
+import {NamespaceId, UInt64} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Namespace id validator

@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import {ProfileCommand} from '../../src/interfaces/profile.command'
 import {ProfileRepository} from '../../src/respositories/profile.repository'
-import {NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {NetworkType, Password, SimpleWallet} from 'tsjs-xpx-chain-sdk'
 import {expect} from 'chai'
 
 describe('Profile Command', () => {

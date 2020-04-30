@@ -20,7 +20,7 @@ import {AddressResolver} from '../../resolvers/address.resolver'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import chalk from 'chalk'
 import {command, metadata} from 'clime'
-import {Listener} from 'symbol-sdk'
+import {Listener} from 'tsjs-xpx-chain-sdk'
 
 @command({
     description: 'Monitor transaction status error',
@@ -41,7 +41,7 @@ export default class extends MonitorAddressCommand {
         listener.open().then(() => {
             listener.status(address).subscribe((transactionStatusError) => {
                 const text = '\nHash: ' + transactionStatusError.hash + '\n' +
-                        'Error code: ' + transactionStatusError.code + '\n' +
+                        'Error code: ' + transactionStatusError.status + '\n' +
                         'Deadline: ' + transactionStatusError.deadline.value.toLocalDate().toString() + ' ' +
                     transactionStatusError.deadline.value.toLocalTime().toString()
                 console.log(text)

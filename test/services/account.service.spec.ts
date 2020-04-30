@@ -17,7 +17,7 @@
  */
 import {AccountService} from '../../src/services/account.service'
 import {expect} from 'chai'
-import {Address, NamespaceId} from 'symbol-sdk'
+import {Address, NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 describe('Account service', () => {
 

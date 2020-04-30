@@ -17,7 +17,7 @@
  */
 import {PayloadResolver} from '../../src/resolvers/payload.resolver'
 import {expect} from 'chai'
-import {Account, Deadline, EmptyMessage, NetworkType, TransferTransaction} from 'symbol-sdk'
+import {Account, Deadline, EmptyMessage, NetworkType, TransferTransaction} from 'tsjs-xpx-chain-sdk'
 
 describe('Payload resolver', () => {
 

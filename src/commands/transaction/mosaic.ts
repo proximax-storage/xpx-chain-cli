@@ -31,10 +31,11 @@ import {
     MosaicDefinitionTransaction,
     MosaicId,
     MosaicNonce,
-    MosaicSupplyChangeAction,
+    MosaicSupplyType,
     MosaicSupplyChangeTransaction,
     UInt64,
-} from 'symbol-sdk'
+    MosaicProperties,
+} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 import chalk from 'chalk'
 
@@ -112,19 +113,23 @@ export default class extends AnnounceTransactionsCommand {
         const amount = await new AmountResolver().resolve(options, 'Amount of mosaics units to create: ')
         const maxFee = await new MaxFeeResolver().resolve(options)
 
+
         const mosaicDefinitionTransaction = MosaicDefinitionTransaction.create(
             Deadline.create(),
             nonce,
             MosaicId.createFromNonce(nonce, account.publicAccount),
-            mosaicFlags,
-            divisibility,
-            blocksDuration ? blocksDuration : UInt64.fromUint(0),
+            MosaicProperties.create({
+                supplyMutable: mosaicFlags.supplyMutable,
+                transferable: mosaicFlags.transferable,
+                divisibility: divisibility,
+                duration: blocksDuration ? blocksDuration : UInt64.fromUint(0)
+            }),
             profile.networkType)
 
         const mosaicSupplyChangeTransaction = MosaicSupplyChangeTransaction.create(
             Deadline.create(),
             mosaicDefinitionTransaction.mosaicId,
-            MosaicSupplyChangeAction.Increase,
+            MosaicSupplyType.Increase,
             amount,
             profile.networkType,
         )

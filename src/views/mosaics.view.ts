@@ -18,7 +18,7 @@
 
 import {NamespacesView} from './namespaces.view'
 import {CellRecord} from './transactions/details/transaction.view'
-import {Mosaic, MosaicId, NamespaceId} from 'symbol-sdk'
+import {Mosaic, MosaicId, NamespaceId} from 'tsjs-xpx-chain-sdk'
 
 export class MosaicsView {
  /**
@@ -33,7 +33,7 @@ export class MosaicsView {
 
  /**
   * Renders a string to be displayed in the view
-  * Renders a namespace name if available (eg: symbol.xym (E74B99BA41F4AFEE))
+  * Renders a namespace name if available (eg: prx.xpx (BFFB42A19116BDF6))
   * @static
   * @param {(MosaicId | NamespaceId)} id
   * @returns {string}

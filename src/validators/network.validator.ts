@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {NetworkType} from 'symbol-sdk'
+import {NetworkType} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Network validator

@@ -19,7 +19,7 @@
 import {CellRecord} from './transaction.view'
 import {transactionNameFromType} from './transactionNameFromType'
 import {Cell} from 'cli-table3'
-import {AggregateTransactionInfo, NetworkType, Transaction} from 'symbol-sdk'
+import {AggregateTransactionInfo, NetworkType, Transaction} from 'tsjs-xpx-chain-sdk'
 
 export interface ITransactionHeaderView extends CellRecord {
   'Title': Cell;

@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {TransactionType} from 'symbol-sdk'
+import {TransactionType} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Transaction type validator

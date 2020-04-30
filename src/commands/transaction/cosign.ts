@@ -35,7 +35,8 @@ import {
     CosignatureTransaction,
     QueryParams,
     TransactionHttp,
-} from 'symbol-sdk'
+    PublicAccount,
+} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 import chalk from 'chalk'
 
@@ -69,9 +70,9 @@ export default class extends ProfileCommand {
         this.spinner.start()
         const sequentialFetcher = this.getSequentialFetcher()
 
-        new MultisigService(this.profile).getSelfAndChildrenAddresses()
+        new MultisigService(this.profile).getSelfAndChildrenAccounts()
             .pipe(
-                switchMap((addresses) => sequentialFetcher.getResults(addresses)),
+                switchMap((accounts) => sequentialFetcher.getResults(accounts)),
                 flatMap((transaction: AggregateTransaction[]) => transaction),
                 filter((_) => _.transactionInfo !== undefined
                     && _.transactionInfo.hash !== undefined
@@ -99,9 +100,9 @@ export default class extends ProfileCommand {
      * @returns {SequentialFetcher}
      */
     private getSequentialFetcher(): SequentialFetcher {
-        const queryParams = new QueryParams({pageSize:100})
-        const networkCall = (address: Address) => new AccountHttp(this.profile.url)
-            .getAccountPartialTransactions(address, queryParams)
+        const queryParams = new QueryParams(100)
+        const networkCall = (id: Address | PublicAccount) => new AccountHttp(this.profile.url)
+            .aggregateBondedTransactions(id as PublicAccount, queryParams)
             .toPromise()
 
         return SequentialFetcher.create(networkCall)

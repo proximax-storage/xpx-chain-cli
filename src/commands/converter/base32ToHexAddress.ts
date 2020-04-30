@@ -18,7 +18,7 @@
 import {ProfileOptions} from '../../interfaces/profile.command'
 import {AddressResolver} from '../../resolvers/address.resolver'
 import {Command, command, metadata, option} from 'clime'
-import {Convert, RawAddress} from 'symbol-sdk'
+import {Convert, RawAddress} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({

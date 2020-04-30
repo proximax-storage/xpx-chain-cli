@@ -17,20 +17,68 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {AccountMetadataTransaction} from 'symbol-sdk'
+import {ModifyMetadataTransaction, Address, MetadataModification, MetadataModificationType} from 'tsjs-xpx-chain-sdk'
+import { RecipientsView } from '../../../recipients.view';
 
 export class AccountMetadataView {
   /**
    * @static
-   * @param {AccountMetadataTransaction} tx
+   * @param {ModifyMetadataTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: AccountMetadataTransaction): CellRecord {
+  static get(tx: ModifyMetadataTransaction): CellRecord {
+    return new AccountMetadataView(tx).render();
+  }
+
+  /**
+   * Creates an instance of AccountMetadataView.
+   * @param {ModifyMetadataTransaction} tx
+   */
+  private constructor(private readonly tx: ModifyMetadataTransaction) {}
+
+  /**
+   * @private
+   * @returns {CellRecord}
+   */
+  private render(): CellRecord {
     return {
-      'Target public key': tx.targetPublicKey,
-      'Scoped metadata key': tx.scopedMetadataKey.toHex(),
-      'Value size delta': tx.valueSizeDelta.toString(),
-      'Value': tx.value,
+      'Account': RecipientsView.get(Address.createFromRawAddress(this.tx.metadataId)),
+      ...this.getModifications(),
+    }
+  }
+
+  /**
+   * @private
+   * @returns {CellRecord}
+   */
+  private getModifications(): CellRecord {
+    const numberOfModifications = this.tx.modifications.length
+    return {
+      ...this.tx.modifications.reduce((mod, modification, index) => ({
+        ...mod,
+        ...this.renderModifications(
+          modification, index, numberOfModifications
+        ),
+      }), {})
+    }
+  }
+
+  /**
+   * @private
+   * @param {MetadataModification} modification
+   * @param {number} index
+   * @param {number} numberOfModifications
+   * @returns {CellRecord}
+   */
+  private renderModifications(
+    modification: MetadataModification,
+    index: number,
+    numberOfModifications: number,
+  ): CellRecord {
+    const key = `${modification.type === MetadataModificationType.ADD ? 'Addition' : 'Deletion'} ${index + 1} of ${numberOfModifications}`
+    return {
+      [key]: modification.key,
+      'Value': modification.value
     }
   }
 }

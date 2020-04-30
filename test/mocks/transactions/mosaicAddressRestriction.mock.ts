@@ -18,7 +18,7 @@
 
 import {account1} from '../accounts.mock'
 import {namespaceId1} from '../namespaces.mock'
-import {Deadline, MosaicAddressRestrictionTransaction, NetworkType, UInt64} from 'symbol-sdk'
+import {Deadline, MosaicAddressRestrictionTransaction, NetworkType, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedMosaicAddressRestriction1 = MosaicAddressRestrictionTransaction.create(
     Deadline.create(),

@@ -16,7 +16,7 @@
  *
  */
 
-import {Account, NetworkType} from 'symbol-sdk'
+import {Account, NetworkType} from 'tsjs-xpx-chain-sdk'
 
 export const account1 = Account.createFromPrivateKey(
  '4EE9CE9246E8B93C4AA3931ED0D9783165C8D68713E5CB58561E7F538CE6B960',

@@ -17,7 +17,7 @@
  */
 
 import {mosaicId1} from '../mosaics.mock'
-import {Deadline, MosaicDefinitionTransaction, MosaicFlags, MosaicNonce, NetworkType, UInt64} from 'symbol-sdk'
+import {Deadline, MosaicDefinitionTransaction, MosaicFlags, MosaicNonce, NetworkType, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedMosaicDefinition1 = MosaicDefinitionTransaction.create(
  Deadline.create(),

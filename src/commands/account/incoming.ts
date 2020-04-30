@@ -19,7 +19,7 @@ import {AccountTransactionsCommand, AccountTransactionsOptions} from '../../inte
 import {AddressResolver} from '../../resolvers/address.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
-import {AccountHttp} from 'symbol-sdk'
+import {AccountHttp} from 'tsjs-xpx-chain-sdk'
 import {command, metadata} from 'clime'
 
 @command({
@@ -38,7 +38,7 @@ export default class extends AccountTransactionsCommand {
 
         this.spinner.start()
         const accountHttp = new AccountHttp(profile.url)
-        accountHttp.getAccountIncomingTransactions(address, options.getQueryParams())
+        accountHttp.incomingTransactions(address, options.getQueryParams())
             .subscribe((transactions) => {
                 this.spinner.stop(true)
                 transactions.map((transaction) => {

@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {Password} from 'symbol-sdk'
+import {Password} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Password validator

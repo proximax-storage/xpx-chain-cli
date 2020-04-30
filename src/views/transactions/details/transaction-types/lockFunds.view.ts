@@ -18,7 +18,7 @@
 
 import {MosaicsView} from '../../../mosaics.view'
 import {CellRecord} from '../transaction.view'
-import {LockFundsTransaction} from 'symbol-sdk'
+import {LockFundsTransaction} from 'tsjs-xpx-chain-sdk'
 
 export class LockFundsView {
   /**

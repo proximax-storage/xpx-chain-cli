@@ -17,7 +17,7 @@
  */
 
 import {account1} from '../accounts.mock'
-import {AccountLinkTransaction, Deadline, LinkAction, NetworkType} from 'symbol-sdk'
+import {AccountLinkTransaction, Deadline, LinkAction, NetworkType} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedAccountLink1 = AccountLinkTransaction.create(
  Deadline.create(),

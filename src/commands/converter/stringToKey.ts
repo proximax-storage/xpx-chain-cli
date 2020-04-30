@@ -15,10 +15,12 @@
 * limitations under the License.
 *
 */
+
+/*
 import {ProfileOptions} from '../../interfaces/profile.command'
 import {StringResolver} from '../../resolvers/string.resolver'
 import {Command, command, metadata, option} from 'clime'
-import {KeyGenerator} from 'symbol-sdk'
+import {KeyGenerator} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -43,3 +45,4 @@ export default class extends Command {
         console.log(KeyGenerator.generateUInt64Key(value).toHex())
     }
 }
+*/

@@ -17,7 +17,7 @@
  */
 import {NamespaceIdResolver, NamespaceNameResolver, NamespaceTypeResolver} from '../../src/resolvers/namespace.resolver'
 import {expect} from 'chai'
-import {NamespaceId, NamespaceRegistrationType} from 'symbol-sdk'
+import {NamespaceId, NamespaceRegistrationType} from 'tsjs-xpx-chain-sdk'
 
 describe('Namespace name resolver', () => {
 

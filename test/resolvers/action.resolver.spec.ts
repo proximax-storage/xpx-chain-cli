@@ -18,7 +18,7 @@
 import {ActionType} from '../../src/models/action.enum'
 import {ActionResolver, LinkActionResolver, SupplyActionResolver} from '../../src/resolvers/action.resolver'
 import {expect} from 'chai'
-import {LinkAction, MosaicSupplyChangeAction} from 'symbol-sdk'
+import {LinkAction, MosaicSupplyType} from 'tsjs-xpx-chain-sdk'
 
 describe('Action resolver', () => {
 
@@ -59,14 +59,14 @@ describe('Supply action resolver', () => {
     it('default case', async () => {
         const options = {action: 'Decrease'} as any
         expect(await new SupplyActionResolver().resolve(options))
-            .to.be.equal(MosaicSupplyChangeAction.Decrease)
+            .to.be.equal(MosaicSupplyType.Decrease)
     })
 
     it('should change key', async () => {
         const options = {key: 'Decrease'} as any
         expect(await new SupplyActionResolver()
             .resolve(options, 'altText', 'key'))
-            .to.be.equal(MosaicSupplyChangeAction.Decrease)
+            .to.be.equal(MosaicSupplyType.Decrease)
     })
 
 })

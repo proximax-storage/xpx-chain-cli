@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from 'clime'
-import {UInt64} from 'symbol-sdk'
+import {UInt64} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Key validator
@@ -29,10 +29,13 @@ export class KeyValidator implements Validator<string> {
      */
     validate(value: string): boolean | string {
         try {
-            UInt64.fromHex(value)
+            if (value) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (err) {
             return 'Invalid key'
         }
-        return true
     }
 }

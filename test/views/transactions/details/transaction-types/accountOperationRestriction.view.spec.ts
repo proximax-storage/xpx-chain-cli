@@ -3,7 +3,7 @@ import {
  operation1, operation2, operation3, unsignedAccountOperationRestriction1,
 } from '../../../../mocks/transactions/accountOperationRestriction.mock'
 import {expect} from 'chai'
-import {TransactionType} from 'symbol-sdk'
+import {TransactionType} from 'tsjs-xpx-chain-sdk'
 
 describe('AccountOperationRestrictionView', () => {
  it('should return a view', () => {

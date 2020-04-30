@@ -17,7 +17,7 @@
  */
 import {ActionType} from '../models/action.enum'
 import {Validator} from './validator'
-import {LinkAction, MosaicSupplyChangeAction} from 'symbol-sdk'
+import {LinkAction, MosaicSupplyType} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Action validator
@@ -53,16 +53,16 @@ export class LinkActionValidator implements Validator<string> {
     }
 }
 
-export class MosaicSupplyChangeActionValidator implements Validator<string> {
+export class MosaicSupplyTypeValidator implements Validator<string> {
 
     /**
      * Validates if a mosaic supply change action is valid.
-     * @param {number} value - MosaicSupplyChangeAction type.
+     * @param {number} value - MosaicSupplyType type.
      * @returns {true | string}
      */
     validate(value: string): boolean | string {
-        const keys = Object.keys(MosaicSupplyChangeAction)
+        const keys = Object.keys(MosaicSupplyType)
             .filter((key) => Number.isNaN(parseFloat(key)))
-        return keys.includes(value) ? true : 'MosaicSupplyChangeAction must be one of (' + keys + ').'
+        return keys.includes(value) ? true : 'MosaicSupplyType must be one of (' + keys + ').'
     }
 }

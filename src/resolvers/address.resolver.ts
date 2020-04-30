@@ -4,7 +4,7 @@ import {OptionsResolver} from '../options-resolver'
 import {AccountService} from '../services/account.service'
 import {AddressAliasValidator, AddressValidator} from '../validators/address.validator'
 import {Resolver} from './resolver'
-import {Address, NamespaceId} from 'symbol-sdk'
+import {Address, NamespaceId} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

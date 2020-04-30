@@ -17,7 +17,7 @@
  */
 import {TransactionTypeResolver} from '../../src/resolvers/transactionType.resolver'
 import {expect} from 'chai'
-import {TransactionType} from 'symbol-sdk'
+import {TransactionType} from 'tsjs-xpx-chain-sdk'
 
 describe('Transaction type resolver', () => {
 

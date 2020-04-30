@@ -1,3 +1,42 @@
+# ProximaX CLI - xpx-chain-cli
+
+Proof of concept. Installation from github only.
+
+## Installation
+
+```
+$ mkdir cli-test
+$ cd cli-test
+
+# install and build tsjs-xpx-chain-sdk dependency from a branch
+
+# inside cli-test folder
+$ git clone --branch xpx-chain-cli-support https://github.com/proximax-storage/tsjs-xpx-chain-sdk.git
+$ cd tsjs-xpx-chain-sdk
+
+# inside tsjs-xpx-chain-sdk folder
+$ npm install && npm run build
+$ cd ..
+
+# inside cli-test folder
+$ git clone --branch merge-from-upstream https://github.com/proximax-storage/xpx-chain-cli.git
+$ cd xpx-chain-cli
+
+# inside xpx-chain-cli folder
+$ npm install && npm run build
+
+# now you can run the xpx-chain-cli executable
+$ ./bin/xpx-chain-cli
+
+# read help, add commands, i.e.
+$ ./bin/xpx-chain-cli profile create
+# for testnet, use i.e. http://bctestnet1.brimstone.xpxsirius.io:3000/
+# for mainnet, use i.e. https://arcturus.xpxsirius.io/
+
+$ ./bin/xpx-chain-cli chain height
+
+```
+
 # Symbol CLI
 
 [![npm version](https://badge.fury.io/js/symbol-cli.svg)](https://badge.fury.io/js/symbol-cli)
@@ -47,7 +86,7 @@ Feel free to start an issue or create a pull request. Check [CONTRIBUTING](CONTR
 ## Getting help
 
 - [Symbol CLI documentation][docs]
-- Join the community [slack group (#sig-client)][slack] 
+- Join the community [slack group (#sig-client)][slack]
 - If you found a bug, [open a new issue][issues]
 
 ## License

@@ -22,12 +22,12 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {NamespaceHttp, NamespaceInfo} from 'symbol-sdk'
+import {NamespaceHttp, NamespaceInfo} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
         flag: 'n',
-        description: 'Namespace name. Example: symbol.xym',
+        description: 'Namespace name. Example: prx.xpx',
     })
     namespaceName: string
 

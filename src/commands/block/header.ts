@@ -22,7 +22,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {BlockHttp, BlockInfo, NetworkType} from 'symbol-sdk'
+import {BlockHttp, BlockInfo, NetworkType} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -88,7 +88,7 @@ export default class extends ProfileCommand {
 
         this.spinner.start()
         const blockHttp = new BlockHttp(profile.url)
-        blockHttp.getBlockByHeight(height)
+        blockHttp.getBlockByHeight(height.compact())
             .subscribe((blockInfo) => {
                 this.spinner.stop(true)
                 console.log(new BlockHeaderTable(blockInfo).toString())

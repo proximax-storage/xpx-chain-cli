@@ -1,7 +1,7 @@
 {
-    "name": "symbol-cli",
-    "version": "0.18.2",
-    "description": "Command Line Interface (CLI) to interact with Symbol",
+    "name": "xpx-chain-cli",
+    "version": "0.1.0",
+    "description": "Command Line Interface (CLI) to interact with ProximaX",
     "main": "index.js",
     "scripts": {
         "pretest": "npm run build",
@@ -15,7 +15,7 @@
         "lint:all:fix": "eslint src/ --ext .ts --fix && eslint test/ --ext .ts --fix"
     },
     "bin": {
-        "symbol-cli": "./bin/symbol-cli"
+        "xpx-chain-cli": "./bin/xpx-chain-cli"
     },
     "contributors": [
         {
@@ -31,10 +31,10 @@
             "email": "david@nem.foundation"
         }
     ],
-    "bugs": "https://github.com/nemtech/symbol-cli/issues",
+    "bugs": "https://github.com/proximax-storage/xpx-chain-cli/issues",
     "repository": {
         "type": "git",
-        "url": "https://github.com/nemtech/symbol-cli.git"
+        "url": "https://github.com/proximax-storage/xpx-chain-cli.git"
     },
     "license": "Apache-2.0",
     "dependencies": {
@@ -48,8 +48,7 @@
         "path": "^0.12.7",
         "prompts": "^2.1.0",
         "readline-sync": "^1.4.9",
-        "rxjs": "^6.5.3",
-        "symbol-sdk": "^0.17.3"
+        "tsjs-xpx-chain-sdk": "file:///../tsjs-xpx-chain-sdk"
     },
     "devDependencies": {
         "@types/chai": "^4.0.4",
@@ -61,12 +60,15 @@
         "eslint": "^6.8.0",
         "eslint-plugin-import": "^2.20.0",
         "eslint-plugin-prefer-arrow": "^1.1.7",
-        "mocha": "^4.0.1",
+        "mocha": "^7.1.2",
         "nodemon": "^2.0.2",
         "nyc": "^15.0.0",
         "ts-mockito": "^2.2.8",
         "ts-node": "^5.0.1",
         "typescript": "^3.8.3"
+    },
+    "peerDependencies": {
+        "rxjs": "^6.5.4"
     },
     "nyc": {
         "exclude": [

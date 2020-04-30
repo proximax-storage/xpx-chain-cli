@@ -27,7 +27,8 @@ import {
     ResolutionStatement,
     Statement,
     TransactionStatement,
-} from 'symbol-sdk'
+    MosaicAlias,
+} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Receipt service
@@ -59,15 +60,15 @@ export class ReceiptService {
                     txt += 'version:\t' + receipt.version + '\n'
                     txt += '\t\ttype:\t\t' + ReceiptType[receipt.type] + '\n'
                     txt += '\t\trecipientAddress:\t' +
-                        (receipt.recipientAddress instanceof Address ?
-                            receipt.recipientAddress.pretty() : receipt.recipientAddress.toHex()) + '\n'
+                        (receipt.recipient instanceof Address ?
+                            receipt.recipient.pretty() : receipt.recipient.toHex()) + '\n'
                     txt += '\t\tsenderPublickey:\t' + receipt.sender.publicKey + '\n'
                     txt += '\t\tmosaicId:\t' + receipt.mosaicId.toHex() + '\n'
                     txt += '\t\tamount:\t\t' + receipt.amount.toString() + '\n'
                 } else if (receipt instanceof BalanceChangeReceipt) {
                     txt += 'version:\t' + receipt.version + '\n'
                     txt += '\t\ttype:\t\t' + ReceiptType[receipt.type] + '\n'
-                    txt += '\t\ttargetPublicKey:\t' + receipt.targetPublicAccount.publicKey + '\n'
+                    txt += '\t\ttargetPublicKey:\t' + receipt.account.publicKey + '\n'
                     txt += '\t\tmosaicId:\t' + receipt.mosaicId.toHex() + '\n'
                     txt += '\t\tamount:\t\t' + receipt.amount.toString() + '\n'
                 } else if (receipt instanceof ArtifactExpiryReceipt) {
@@ -103,7 +104,7 @@ export class ReceiptService {
             addressResolution.resolutionEntries.map((resolutionEntry: ResolutionEntry, resolutionEntryIndex: number) => {
                 txt += '<index:' + addressResolutionIndex + '-' + resolutionEntryIndex + '>\t'
                 txt += 'resolved:\t\t' + (resolutionEntry.resolved instanceof Address ?
-                    resolutionEntry.resolved.pretty() : resolutionEntry.resolved.toHex()) + '\n'
+                    resolutionEntry.resolved.pretty() : (resolutionEntry.resolved as MosaicAlias).toHex()) + '\n'
                 txt += '\t\tprimaryId:\t\t' + resolutionEntry.source.primaryId + '\n'
                 txt += '\t\tsecondaryId:\t\t' + resolutionEntry.source.secondaryId + '\n\n'
             })
@@ -129,7 +130,7 @@ export class ReceiptService {
             mosaicResolution.resolutionEntries.map((resolutionEntry: ResolutionEntry, resolutionEntryIndex: number) => {
                 txt += '<index:' + mosaicResolutionIndex + '-' + resolutionEntryIndex + '>\t'
                 txt += 'resolved:\t\t' + (resolutionEntry.resolved instanceof Address ?
-                    resolutionEntry.resolved.pretty() : resolutionEntry.resolved.toHex()) + '\n'
+                    resolutionEntry.resolved.pretty() : (resolutionEntry.resolved as MosaicAlias).toHex()) + '\n'
                 txt += '\t\tprimaryId:\t\t' + resolutionEntry.source.primaryId + '\n'
                 txt += '\t\tsecondaryId:\t\t' + resolutionEntry.source.secondaryId + '\n\n'
             })

@@ -17,23 +17,23 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {NamespaceRegistrationTransaction, NamespaceRegistrationType} from 'symbol-sdk'
+import {RegisterNamespaceTransaction, NamespaceType} from 'tsjs-xpx-chain-sdk'
 
 export class NamespaceRegistrationView {
   /**
    * @static
-   * @param {NamespaceRegistrationTransaction} tx
+   * @param {RegisterNamespaceTransaction} tx
    * @returns {CellRecord}
    */
-  static get(tx: NamespaceRegistrationTransaction): CellRecord {
+  static get(tx: RegisterNamespaceTransaction): CellRecord {
     return new NamespaceRegistrationView(tx).render()
   }
 
   /**
    * Creates an instance of NamespaceRegistrationView.
-   * @param {NamespaceRegistrationTransaction} tx
+   * @param {RegisterNamespaceTransaction} tx
    */
-  private constructor(private readonly tx: NamespaceRegistrationTransaction) {}
+  private constructor(private readonly tx: RegisterNamespaceTransaction) {}
 
   /**
    * @private
@@ -42,7 +42,7 @@ export class NamespaceRegistrationView {
   private render(): CellRecord {
     return {
       'Namespace name': this.tx.namespaceName,
-      ...this.tx.registrationType === NamespaceRegistrationType.RootNamespace
+      ...this.tx.type === NamespaceType.RootNamespace
         ? this.getRootNamespaceProps() : this.getSubNamespaceProps(),
     }
   }

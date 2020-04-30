@@ -22,7 +22,7 @@ import {MosaicIdResolver} from '../../resolvers/mosaic.resolver'
 import {NamespaceNameResolver} from '../../resolvers/namespace.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {Deadline, MosaicAliasTransaction} from 'symbol-sdk'
+import {Deadline, MosaicAliasTransaction} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {

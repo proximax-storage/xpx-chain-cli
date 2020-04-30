@@ -16,7 +16,7 @@
  *
  */
 
-import {Mosaic, MosaicId, NamespaceId, UInt64} from 'symbol-sdk'
+import {Mosaic, MosaicId, NamespaceId, UInt64} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Mosaic service
@@ -49,7 +49,7 @@ export class MosaicService {
         }
         if (!valid) {
             return 'Mosaic should be in the format (mosaicId(hex)|@aliasName)::absoluteAmount,' +
-                ' (Ex: sending 1 symbol.xym, @symbol.xym::1000000)'
+                ' (Ex: sending 1 prx.xpx, @prx.xpx::1000000)'
         }
         return valid
     }

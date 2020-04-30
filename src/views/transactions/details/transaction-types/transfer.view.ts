@@ -19,7 +19,7 @@
 import {MosaicsView} from '../../../mosaics.view'
 import {RecipientsView} from '../../../recipients.view'
 import {CellRecord} from '../transaction.view'
-import {TransferTransaction} from 'symbol-sdk'
+import {TransferTransaction} from 'tsjs-xpx-chain-sdk'
 
 export class TransferView {
   /**
@@ -54,7 +54,7 @@ export class TransferView {
    * @returns {string}
    */
   private getRecipient(): string {
-    if (!this.tx.recipientAddress) {return '' }
-    return RecipientsView.get(this.tx.recipientAddress)
+    if (!this.tx.recipient) {return '' }
+    return RecipientsView.get(this.tx.recipient)
   }
 }

@@ -3,7 +3,7 @@ import {MosaicService} from '../services/mosaic.service'
 import {MosaicsValidator} from '../validators/mosaic.validator'
 import {MosaicIdAliasValidator, MosaicIdValidator} from '../validators/mosaicId.validator'
 import {Resolver} from './resolver'
-import {Mosaic, MosaicFlags, MosaicId, NamespaceId} from 'symbol-sdk'
+import {Mosaic, MosaicId, NamespaceId, MosaicProperties, UInt64} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**
@@ -87,7 +87,7 @@ export class MosaicsResolver implements Resolver {
             altKey ? altKey : 'mosaics',
             () =>  undefined,
             altText ? altText : 'Mosaics to transfer in the format (mosaicId(hex)|@aliasName)::absoluteAmount,' +
-                ' (Ex: sending 1 symbol.xym, @symbol.xym::1000000). Add multiple mosaics separated by commas:',
+                ' (Ex: sending 1 prx.xpx, @prx.xpx::1000000). Add multiple mosaics separated by commas:',
             'text',
             new MosaicsValidator())
         return resolution ? MosaicService.getMosaics(resolution) : []
@@ -104,11 +104,11 @@ export class MosaicFlagsResolver implements Resolver {
      * @param {Options} options - Command options.
      * @returns {Promise<MosaicFlags>}
      */
-    async resolve(options: Options): Promise<MosaicFlags> {
-
-        return MosaicFlags.create(
-                await OptionsConfirmResolver(options, 'supplyMutable', 'Do you want this mosaic to have supply mutable?'),
-                await OptionsConfirmResolver(options, 'transferable','Do you want this mosaic to be transferable?'),
-                await OptionsConfirmResolver(options, 'restrictable','Do you want this mosaic to be restrictable?'))
+    async resolve(options: Options): Promise<MosaicProperties> {
+        return MosaicProperties.create({
+            supplyMutable: await OptionsConfirmResolver(options, 'supplyMutable', 'Do you want this mosaic to have supply mutable?'),
+            transferable: await OptionsConfirmResolver(options, 'transferable','Do you want this mosaic to be transferable?'),
+            divisibility: 0
+        });
     }
 }

@@ -16,7 +16,7 @@
  *
  */
 
-import {Address} from 'symbol-sdk'
+import {Address, PublicAccount} from 'tsjs-xpx-chain-sdk'
 import {Observable, Subject} from 'rxjs'
 import {startWith} from 'rxjs/operators'
 
@@ -31,12 +31,12 @@ export class SequentialFetcher {
   private transactionsSubject: Subject<any>
 
   /**
-   * @param  {(address:Address)=>Promise<T>} networkCallFunction
+   * @param  {(id:Address|PublicAccount)=>Promise<T>} networkCallFunction
    * @param  {number} minDelay minimum delay in ms between each network call
    * @returns {SequentialFetcher}
    */
   static create(
-    networkCallFunction: (address: Address) => Promise<any>,
+    networkCallFunction: (id: Address | PublicAccount) => Promise<any>,
     minDelay = SEQUENTIAL_FETCHER_DEFAULT_DELAY,
   ): SequentialFetcher {
     return new SequentialFetcher(networkCallFunction, minDelay)
@@ -44,11 +44,11 @@ export class SequentialFetcher {
 
   /**
    * Creates an instance of SequentialFetcher.
-   * @param {(address: Address) => Promise<any[]>} networkCallFunction
+   * @param {(id: Address | PublicAccount) => Promise<any[]>} networkCallFunction
    * @param {number} minDelay
    */
   private constructor(
-    private networkCallFunction: (address: Address) => Promise<any[]>,
+    private networkCallFunction: (id: Address | PublicAccount) => Promise<any[]>,
     private minDelay: number,
   ) {
     this.routineController = new Subject()
@@ -57,12 +57,12 @@ export class SequentialFetcher {
 
   /**
    * Get partial transactions from a sequential fetching routine
-   * @param  {Address[]} addresses
+   * @param  {Address[] | PublicAccount[]} ids
    * @returns {Observable<any>}
    */
-  getResults(addresses: Address[]): Observable<any> {
+  getResults(ids: Address[] | PublicAccount[]): Observable<any> {
     if (this.isFetching) {this.kill() }
-    this.setIterators(addresses)
+    this.setIterators(ids)
     this.isFetching = true
     this.startFetchingRoutine()
     return this.transactionsSubject
@@ -80,37 +80,37 @@ export class SequentialFetcher {
   /**
    * Creates an iterator from an array of addresses
    * @private
-   * @param {Address[]} addresses
+   * @param {Address[] | PublicAccount[]} ids
    */
-  private setIterators(addresses: Address[]) {
-    const addressesIterator = addresses[Symbol.iterator]()
-    this.networkCallsIterator = this.createNetworkCallsIterator(addressesIterator)
+  private setIterators(ids: Address[] | PublicAccount[]) {
+    const idsIterator = ids[Symbol.iterator]()
+    this.networkCallsIterator = this.createNetworkCallsIterator(idsIterator)
   }
 
   /**
    * Iterates network calls sequentially
    * @private
-   * @param {IterableIterator<Address>} addresses
+   * @param {IterableIterator<Address|PublicAccount>} addresses
    */
-  private async * createNetworkCallsIterator(addresses: IterableIterator<Address>) {
-    for await (const address of addresses) {
-      yield this.networkCall(address)
+  private async * createNetworkCallsIterator(ids: IterableIterator<Address|PublicAccount>) {
+    for await (const id of ids) {
+      yield this.networkCall(id)
     }
   }
 
   /**
    * Handle network calls responses and errors
    * @private
-   * @param {Address} address
+   * @param {Address|PublicAccount} id
    * @returns {Promise<{response: any, address: Address}>}
    */
-  private async networkCall(address: Address): Promise<{response: any; address: Address}> {
+  private async networkCall(id: Address | PublicAccount): Promise<{response: any; id: Address|PublicAccount}> {
     try {
-      const promises = await Promise.all([this.networkCallFunction(address), this.delay()])
+      const promises = await Promise.all([this.networkCallFunction(id), this.delay()])
       const [response] = promises
-      return {response, address}
+      return {response, id}
     } catch (error) {
-      return {response: null, address}
+      return {response: null, id}
     }
   }
 

@@ -17,7 +17,7 @@
  */
 
 import {namespaceId1} from './namespaces.mock'
-import {Mosaic, MosaicId, UInt64} from 'symbol-sdk'
+import {Mosaic, MosaicId, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const mosaicId1 = new MosaicId([3646934825, 3576016193])
 export const mosaicId2 = new MosaicId([2262289484, 3405110546])

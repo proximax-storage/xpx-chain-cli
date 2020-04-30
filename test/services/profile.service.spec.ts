@@ -19,7 +19,7 @@ import {Profile} from '../../src/models/profile.model'
 import {ProfileRepository} from '../../src/respositories/profile.repository'
 import {ProfileService} from '../../src/services/profile.service'
 import {expect} from 'chai'
-import {NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {NetworkType, Password, SimpleWallet} from 'tsjs-xpx-chain-sdk'
 import {instance, mock, when} from 'ts-mockito'
 
 describe('Configure service', () => {

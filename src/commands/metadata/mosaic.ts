@@ -19,7 +19,7 @@ import {ProfileCommand, ProfileOptions} from '../../interfaces/profile.command'
 import {MosaicIdResolver} from '../../resolvers/mosaic.resolver'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
 import {MetadataEntryTable} from './account'
-import {Metadata, MetadataHttp} from 'symbol-sdk'
+import {MetadataHttp, Field} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends ProfileOptions {
@@ -49,10 +49,10 @@ export default class extends ProfileCommand {
         metadataHttp.getMosaicMetadata(mosaicId)
             .subscribe((metadataEntries) => {
                 this.spinner.stop(true)
-                if (metadataEntries.length > 0) {
-                    metadataEntries
-                        .map((entry: Metadata) => {
-                            console.log(new MetadataEntryTable(entry.metadataEntry).toString())
+                if (metadataEntries.fields.length > 0) {
+                    metadataEntries.fields
+                        .map((entry: Field) => {
+                            console.log(new MetadataEntryTable(entry).toString())
                         })
                 } else {
                     console.log('\n The mosaic does not have metadata entries assigned.')

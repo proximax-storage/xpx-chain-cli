@@ -16,37 +16,35 @@
  *
  */
 
-import {TransactionType} from 'symbol-sdk'
+import {TransactionType} from 'tsjs-xpx-chain-sdk'
 
 export const transactionNameFromType = (type: TransactionType): string => {
- try {
-  const bridge: Record<TransactionType, string> = {
-   [TransactionType.RESERVED]: 'Reserved',
-   [TransactionType.TRANSFER]: 'Transfer',
-   [TransactionType.NAMESPACE_REGISTRATION]: 'Namespace registration',
-   [TransactionType.ADDRESS_ALIAS]: 'Address alias',
-   [TransactionType.MOSAIC_ALIAS]: 'Mosaic alias',
-   [TransactionType.MOSAIC_DEFINITION]: 'Mosaic definition',
-   [TransactionType.MOSAIC_SUPPLY_CHANGE]: 'Mosaic supply change',
-   [TransactionType.MULTISIG_ACCOUNT_MODIFICATION]: 'Multisig account modification',
-   [TransactionType.AGGREGATE_COMPLETE]: 'Aggregate complete',
-   [TransactionType.AGGREGATE_BONDED]: 'Aggregate bonded',
-   [TransactionType.HASH_LOCK]: 'Lock funds',
-   [TransactionType.SECRET_LOCK]: 'Secret lock',
-   [TransactionType.SECRET_PROOF]: 'Secret proof',
-   [TransactionType.ACCOUNT_ADDRESS_RESTRICTION]: 'Account address restriction',
-   [TransactionType.ACCOUNT_MOSAIC_RESTRICTION]: 'Account mosaic restriction',
-   [TransactionType.ACCOUNT_OPERATION_RESTRICTION]: 'Account operation restriction',
-   [TransactionType.ACCOUNT_LINK]: 'Account link',
-   [TransactionType.MOSAIC_ADDRESS_RESTRICTION]: 'Mosaic address restriction',
-   [TransactionType.MOSAIC_GLOBAL_RESTRICTION]: 'Mosaic global restriction',
-   [TransactionType.ACCOUNT_METADATA]: 'Account metadata transaction',
-   [TransactionType.MOSAIC_METADATA]: 'Mosaic metadata transaction',
-   [TransactionType.NAMESPACE_METADATA]: 'Namespace metadata transaction',
-  }
 
-  return bridge[type]
- } catch {
-  throw new Error(`Transaction type not found: ${type}`)
- }
+    const bridge: [number, string][] = [
+        [TransactionType.TRANSFER, 'Transfer'],
+        [TransactionType.REGISTER_NAMESPACE, 'Namespace registration'],
+        [TransactionType.ADDRESS_ALIAS, 'Address alias'],
+        [TransactionType.MOSAIC_ALIAS, 'Mosaic alias'],
+        [TransactionType.MOSAIC_DEFINITION, 'Mosaic definition'],
+        [TransactionType.MOSAIC_SUPPLY_CHANGE, 'Mosaic supply change'],
+        [TransactionType.MODIFY_MULTISIG_ACCOUNT, 'Multisig account modification'],
+        [TransactionType.AGGREGATE_COMPLETE, 'Aggregate complete'],
+        [TransactionType.AGGREGATE_BONDED, 'Aggregate bonded'],
+        [TransactionType.LOCK, 'Lock funds'],
+        [TransactionType.SECRET_LOCK, 'Secret lock'],
+        [TransactionType.SECRET_PROOF, 'Secret proof'],
+        [TransactionType.MODIFY_ACCOUNT_RESTRICTION_ADDRESS, 'Account address restriction'],
+        [TransactionType.MODIFY_ACCOUNT_RESTRICTION_MOSAIC, 'Account mosaic restriction'],
+        [TransactionType.MODIFY_ACCOUNT_RESTRICTION_OPERATION, 'Account operation restriction'],
+        [TransactionType.LINK_ACCOUNT, 'Account link'],
+        [TransactionType.MODIFY_ACCOUNT_METADATA, 'Account metadata transaction'],
+        [TransactionType.MODIFY_MOSAIC_METADATA, 'Mosaic metadata transaction'],
+        [TransactionType.MODIFY_NAMESPACE_METADATA, 'Namespace metadata transaction'],
+    ];
+    const found = bridge.find(b => b[0] === type);
+    if (found) {
+        return found[1];
+    } else {
+        throw new Error(`Transaction type not found: ${type}`)
+    }
 }

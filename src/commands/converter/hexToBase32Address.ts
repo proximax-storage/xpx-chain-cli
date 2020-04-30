@@ -18,7 +18,7 @@
 import {ProfileOptions} from '../../interfaces/profile.command'
 import {HexAddressResolver} from '../../resolvers/hexAddress.resolver'
 import {Command, command, metadata, option} from 'clime'
-import {Address} from 'symbol-sdk'
+import {Address} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({

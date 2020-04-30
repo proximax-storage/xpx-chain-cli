@@ -1,7 +1,7 @@
 import {OptionsChoiceResolver} from '../options-resolver'
 import {HashAlgorithmValidator} from '../validators/hashAlgorithm.validator'
 import {Resolver} from './resolver'
-import {HashType} from 'symbol-sdk'
+import {HashType} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

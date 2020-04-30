@@ -17,7 +17,7 @@
  */
 
 import {account1, account2, account3} from '../accounts.mock'
-import {AccountRestrictionFlags, AccountRestrictionTransaction, Deadline, NetworkType} from 'symbol-sdk'
+import {AccountRestrictionFlags, AccountRestrictionTransaction, Deadline, NetworkType} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedAccountAddressRestriction1 = AccountRestrictionTransaction
  .createAddressRestrictionModificationTransaction(

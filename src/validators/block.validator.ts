@@ -16,7 +16,7 @@
  *
  */
 import {Validator} from './validator'
-import {UInt64} from 'symbol-sdk'
+import {UInt64} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Height validator

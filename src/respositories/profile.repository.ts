@@ -17,7 +17,7 @@
  */
 import * as fs from 'fs'
 import {Profile} from '../models/profile.model'
-import {SimpleWallet} from 'symbol-sdk'
+import {SimpleWallet} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Profile repository

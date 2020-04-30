@@ -17,7 +17,7 @@
  */
 
 import {mosaicId1, mosaicId2} from '../mosaics.mock'
-import {Deadline, MosaicGlobalRestrictionTransaction, MosaicRestrictionType, NetworkType, UInt64} from 'symbol-sdk'
+import {Deadline, MosaicGlobalRestrictionTransaction, MosaicRestrictionType, NetworkType, UInt64} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedMosaicGlobalRestriction1 = MosaicGlobalRestrictionTransaction
     .create(

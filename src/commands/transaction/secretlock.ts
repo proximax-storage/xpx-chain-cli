@@ -25,7 +25,7 @@ import {MosaicIdAliasResolver} from '../../resolvers/mosaic.resolver'
 import {SecretResolver} from '../../resolvers/secret.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {Deadline, Mosaic, SecretLockTransaction} from 'symbol-sdk'
+import {Deadline, Mosaic, SecretLockTransaction, Address} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {
@@ -98,7 +98,7 @@ export default class extends AnnounceTransactionsCommand {
             duration,
             hashAlgorithm,
             secret,
-            recipientAddress,
+            recipientAddress as Address,
             profile.networkType,
             maxFee)
         const signedTransaction = account.sign(transaction, profile.networkGenerationHash)

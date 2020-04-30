@@ -1,7 +1,7 @@
 import {OptionsResolver} from '../options-resolver'
 import {PasswordValidator} from '../validators/password.validator'
 import {Resolver} from './resolver'
-import {Password} from 'symbol-sdk'
+import {Password} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

@@ -1,6 +1,6 @@
 import {OptionsResolver} from '../options-resolver'
 import {Resolver} from './resolver'
-import {UInt64} from 'symbol-sdk'
+import {UInt64} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 import {NumericStringValidator} from '../validators/numericString.validator'
 

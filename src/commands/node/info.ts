@@ -21,7 +21,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata} from 'clime'
-import {NodeHttp, NodeInfo} from 'symbol-sdk'
+import {NodeHttp, NodeInfo} from 'tsjs-xpx-chain-sdk'
 
 export class NodeInfoTable {
     private readonly table: HorizontalTable
@@ -33,7 +33,6 @@ export class NodeInfoTable {
         this.table.push(
             ['Friendly Name', nodeInfo.friendlyName],
             ['Host', nodeInfo.host],
-            ['Network Generation Hash', nodeInfo.networkGenerationHash],
             ['Network Identifier', nodeInfo.networkIdentifier],
             ['Port', nodeInfo.port],
             ['Public Key', nodeInfo.publicKey],

@@ -1,7 +1,7 @@
 import {OptionsResolver} from '../options-resolver'
 import {HeightValidator} from '../validators/block.validator'
 import {Resolver} from './resolver'
-import {UInt64} from 'symbol-sdk'
+import {UInt64} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

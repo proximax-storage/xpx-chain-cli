@@ -18,7 +18,7 @@
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {ExpectedError} from 'clime'
-import {Account, Address, ISimpleWalletDTO, NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {Account, Address, ISimpleWalletDTO, NetworkType, Password, SimpleWallet, PublicAccount} from 'tsjs-xpx-chain-sdk'
 
 /**
  * Profile data transfer object.
@@ -64,6 +64,16 @@ export class Profile {
      */
     get address(): Address {
         return this.simpleWallet.address
+    }
+
+    /**
+     * Gets profile public account
+     * @returns {PublicAccount}
+     */
+    get publicAccount(): PublicAccount {
+        //TODO: xpx fixme
+        //return this.simpleWallet.publicAccount
+        return undefined as unknown as PublicAccount;
     }
 
     /**

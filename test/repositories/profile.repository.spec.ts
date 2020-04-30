@@ -18,7 +18,7 @@
 import * as fs from 'fs'
 import {Profile} from '../../src/models/profile.model'
 import {ProfileRepository} from '../../src/respositories/profile.repository'
-import {NetworkType, Password, SimpleWallet} from 'symbol-sdk'
+import {NetworkType, Password, SimpleWallet} from 'tsjs-xpx-chain-sdk'
 import {expect} from 'chai'
 
 describe('ProfileRepository', () => {

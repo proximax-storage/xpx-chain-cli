@@ -1,6 +1,6 @@
 import {OptionsResolver} from '../options-resolver'
 import {Resolver} from './resolver'
-import {InnerTransaction, Transaction, TransactionMapping} from 'symbol-sdk'
+import {InnerTransaction, Transaction, TransactionMapping} from 'tsjs-xpx-chain-sdk'
 import {Options} from 'clime'
 
 /**

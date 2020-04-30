@@ -22,7 +22,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata, option} from 'clime'
-import {AccountRestriction, AccountRestrictionFlags, RestrictionAccountHttp} from 'symbol-sdk'
+import {AccountRestriction, RestrictionType, AccountRestrictions, AccountHttp} from 'tsjs-xpx-chain-sdk'
 
 export class CommandOptions extends ProfileOptions {
     @option({
@@ -45,7 +45,7 @@ export class AccountRestrictionsTable {
             .filter((accountRestriction) => accountRestriction.values.length > 0)
             .map((accountRestriction) => {
                 this.table.push(
-                    [AccountRestrictionFlags[accountRestriction.restrictionFlags], accountRestriction.values.toString()],
+                    [accountRestriction.restrictionType.toString(), accountRestriction.values.toString()],
                 )
             })
     }
@@ -73,7 +73,7 @@ export default class extends ProfileCommand {
         const address = await new AddressResolver().resolve(options, profile)
 
         this.spinner.start()
-        const restrictionHttp = new RestrictionAccountHttp(profile.url)
+        const restrictionHttp = new AccountHttp(profile.url)
         restrictionHttp.getAccountRestrictions(address)
             .subscribe((accountRestrictions: any) => {
                 this.spinner.stop(true)

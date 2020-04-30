@@ -17,7 +17,7 @@
  */
 
 import {CellRecord} from '../transaction.view'
-import {AccountLinkTransaction, LinkAction} from 'symbol-sdk'
+import {AccountLinkTransaction, LinkAction} from 'tsjs-xpx-chain-sdk'
 
 export class AccountLinkView {
   /**
@@ -28,7 +28,7 @@ export class AccountLinkView {
   static get(tx: AccountLinkTransaction): CellRecord {
     return {
       ['Action']: LinkAction[tx.linkAction],
-      ['Remote public key']: tx.remotePublicKey,
+      ['Remote public key']: tx.remoteAccountKey,
     }
   }
 }

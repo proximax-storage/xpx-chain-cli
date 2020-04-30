@@ -19,7 +19,7 @@ import {MonitorAddressCommand, MonitorAddressOptions} from '../../interfaces/mon
 import {AddressResolver} from '../../resolvers/address.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {HttpErrorHandler} from '../../services/httpErrorHandler.service'
-import {Listener} from 'symbol-sdk'
+import {Listener} from 'tsjs-xpx-chain-sdk'
 import {command, metadata} from 'clime'
 import chalk from 'chalk'
 

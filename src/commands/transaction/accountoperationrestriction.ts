@@ -24,7 +24,7 @@ import {TransactionTypeResolver} from '../../resolvers/transactionType.resolver'
 import {TransactionView} from '../../views/transactions/details/transaction.view'
 import {ActionType} from '../../models/action.enum'
 import {PasswordResolver} from '../../resolvers/password.resolver'
-import {AccountRestrictionTransaction, Deadline} from 'symbol-sdk'
+import {AccountRestrictionTransaction, Deadline, AccountRestrictionModification, RestrictionModificationType} from 'tsjs-xpx-chain-sdk'
 import {command, metadata, option} from 'clime'
 
 export class CommandOptions extends AnnounceTransactionsOptions {
@@ -71,8 +71,10 @@ export default class extends AnnounceTransactionsCommand {
         const transaction = AccountRestrictionTransaction.createOperationRestrictionModificationTransaction(
             Deadline.create(),
             flags,
-            (action === ActionType.Add) ? [transactionType] : [],
-            (action === ActionType.Remove) ? [transactionType] : [],
+            [
+                AccountRestrictionModification.createForOperation(action === ActionType.Add ? RestrictionModificationType.Add : RestrictionModificationType.Remove,
+                    transactionType)
+            ],
             profile.networkType,
             maxFee)
         const signedTransaction = account.sign(transaction, profile.networkGenerationHash)

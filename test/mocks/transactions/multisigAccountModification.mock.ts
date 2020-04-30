@@ -17,7 +17,7 @@
  */
 
 import {account1, account2, account3} from '../accounts.mock'
-import {Deadline, MultisigAccountModificationTransaction, NetworkType} from 'symbol-sdk'
+import {Deadline, MultisigAccountModificationTransaction, NetworkType} from 'tsjs-xpx-chain-sdk'
 
 export const unsignedMultisigAccountModification1 = MultisigAccountModificationTransaction.create(
  Deadline.create(),

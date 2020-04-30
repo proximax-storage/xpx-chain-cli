@@ -27,10 +27,8 @@ import {
  AggregateBondedView,
  AggregateCompleteView,
  LockFundsView,
- MosaicAddressRestrictionView,
  MosaicAliasView,
  MosaicDefinitionView,
- MosaicGlobalRestrictionView,
  MosaicMetadataView,
  MosaicSupplyChangeView,
  MultisigAccountModificationView,
@@ -41,48 +39,38 @@ import {
  TransferView,
 } from './transaction-types'
 import {CellRecord} from './transaction.view'
-import {Transaction, TransactionType} from 'symbol-sdk'
+import {Transaction, TransactionType} from 'tsjs-xpx-chain-sdk'
 
 /**
  * @param  {Transaction} transaction
  * @returns {CellRecord}
  */
 export const transactionDetailViewFactory = (tx: Transaction): CellRecord => {
- try {
-  const type: TransactionType = tx.type
-
-  if (type === TransactionType.RESERVED) {
-   throw new Error('The transaction type can not be reserved')
+  const formatters:[number, (tx: any) => CellRecord][] = [
+    [TransactionType.TRANSFER, TransferView.get],
+    [TransactionType.REGISTER_NAMESPACE, NamespaceRegistrationView.get],
+    [TransactionType.ADDRESS_ALIAS, AddressAliasView.get],
+    [TransactionType.MOSAIC_ALIAS, MosaicAliasView.get],
+    [TransactionType.MOSAIC_DEFINITION, MosaicDefinitionView.get],
+    [TransactionType.MOSAIC_SUPPLY_CHANGE, MosaicSupplyChangeView.get],
+    [TransactionType.MODIFY_MULTISIG_ACCOUNT, MultisigAccountModificationView.get],
+    [TransactionType.AGGREGATE_COMPLETE, AggregateCompleteView.get],
+    [TransactionType.AGGREGATE_BONDED, AggregateBondedView.get],
+    [TransactionType.LOCK, LockFundsView.get],
+    [TransactionType.SECRET_LOCK, SecretLockView.get],
+    [TransactionType.SECRET_PROOF, SecretProofView.get],
+    [TransactionType.MODIFY_ACCOUNT_RESTRICTION_ADDRESS, AccountAddressRestrictionView.get],
+    [TransactionType.MODIFY_ACCOUNT_RESTRICTION_MOSAIC, AccountMosaicRestrictionView.get],
+    [TransactionType.MODIFY_ACCOUNT_RESTRICTION_OPERATION, AccountOperationRestrictionView.get],
+    [TransactionType.LINK_ACCOUNT, AccountLinkView.get],
+    [TransactionType.MODIFY_ACCOUNT_METADATA, AccountMetadataView.get],
+    [TransactionType.MODIFY_MOSAIC_METADATA, MosaicMetadataView.get],
+    [TransactionType.MODIFY_NAMESPACE_METADATA, NamespaceMetadataView.get],
+   ];
+  const formatter = formatters.find(formatter => formatter[0] === tx.type);
+  if (formatter) {
+      return formatter[1](tx);
+  } else {
+    throw new Error(`Transaction type not found: ${tx.type}`)
   }
-
-  const formatters: Record<TransactionType, any> = {
-   [TransactionType.RESERVED]: {},
-   [TransactionType.TRANSFER]: TransferView,
-   [TransactionType.NAMESPACE_REGISTRATION]: NamespaceRegistrationView,
-   [TransactionType.ADDRESS_ALIAS]: AddressAliasView,
-   [TransactionType.MOSAIC_ALIAS]: MosaicAliasView,
-   [TransactionType.MOSAIC_DEFINITION]: MosaicDefinitionView,
-   [TransactionType.MOSAIC_SUPPLY_CHANGE]: MosaicSupplyChangeView,
-   [TransactionType.MULTISIG_ACCOUNT_MODIFICATION]: MultisigAccountModificationView,
-   [TransactionType.AGGREGATE_COMPLETE]: AggregateCompleteView,
-   [TransactionType.AGGREGATE_BONDED]: AggregateBondedView,
-   [TransactionType.HASH_LOCK]: LockFundsView,
-   [TransactionType.SECRET_LOCK]: SecretLockView,
-   [TransactionType.SECRET_PROOF]: SecretProofView,
-   [TransactionType.ACCOUNT_ADDRESS_RESTRICTION]: AccountAddressRestrictionView,
-   [TransactionType.ACCOUNT_MOSAIC_RESTRICTION]: AccountMosaicRestrictionView,
-   [TransactionType.ACCOUNT_OPERATION_RESTRICTION]: AccountOperationRestrictionView,
-   [TransactionType.ACCOUNT_LINK]: AccountLinkView,
-   [TransactionType.MOSAIC_ADDRESS_RESTRICTION]: MosaicAddressRestrictionView,
-   [TransactionType.MOSAIC_GLOBAL_RESTRICTION]: MosaicGlobalRestrictionView,
-   [TransactionType.ACCOUNT_METADATA]: AccountMetadataView,
-   [TransactionType.MOSAIC_METADATA]: MosaicMetadataView,
-   [TransactionType.NAMESPACE_METADATA]: NamespaceMetadataView,
-  }
-
-  const formatter = formatters[type]
-  return formatter.get(tx)
- } catch (error) {
-  throw new Error(`Transaction type not found: ${tx.type}`)
- }
 }

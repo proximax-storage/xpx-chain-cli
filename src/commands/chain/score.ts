@@ -21,7 +21,7 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import {HorizontalTable} from 'cli-table3'
 import {command, metadata} from 'clime'
-import {BlockchainScore, ChainHttp} from 'symbol-sdk'
+import {BlockchainScore, ChainHttp} from 'tsjs-xpx-chain-sdk'
 
 export class ChainScoreTable {
     private readonly table: HorizontalTable
@@ -59,7 +59,7 @@ export default class extends ProfileCommand {
 
         this.spinner.start()
         const chainHttp = new ChainHttp(profile.url)
-        chainHttp.getChainScore().subscribe((score) => {
+        chainHttp.getBlockchainScore().subscribe((score) => {
             this.spinner.stop(true)
             console.log(new ChainScoreTable(score).toString())
         }, (err) => {

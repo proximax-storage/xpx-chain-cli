@@ -16,8 +16,8 @@
  *
  */
 
-import {NamespaceId} from 'symbol-sdk'
+import {NamespaceId} from 'tsjs-xpx-chain-sdk'
 
-export const namespaceId1 = new NamespaceId('symbol.xym')
+export const namespaceId1 = new NamespaceId('prx.xpx')
 export const namespaceId2 = new NamespaceId('alice')
 export const namespaceId3 = new NamespaceId('bob')
